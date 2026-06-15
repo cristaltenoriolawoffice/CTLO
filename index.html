@@ -3,142 +3,151 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Attorney Tenorio</title>
+<title>ATTY. DONNABEL C. TENORIO</title>
 
 <style>
   body{
+    margin:0;
+    padding:50px 20px;
     font-family: Garamond, serif;
     background:#fff;
     color:#000;
-    margin:0;
-    padding:40px 20px;
+  }
+
+  .wrap{
+    max-width:420px;
+    margin:auto;
     text-align:center;
   }
 
+  /* NAME */
   .name{
-    font-size:22px;
+    font-size:20px;
     letter-spacing:2px;
     font-weight:500;
+    text-transform:uppercase;
   }
 
-  .sub{
+  .role{
     font-size:12px;
     letter-spacing:3px;
-    margin-top:5px;
+    margin-top:8px;
+    opacity:0.9;
   }
 
   .office{
     font-size:14px;
-    margin-top:5px;
-    margin-bottom:25px;
+    margin-top:6px;
+    margin-bottom:40px;
   }
 
   /* ICON ROW */
-  .row{
+  .icons{
     display:flex;
     justify-content:center;
-    gap:60px;
-    margin:25px 0;
+    gap:70px;
+    margin-bottom:25px;
   }
 
   .icon{
     text-decoration:none;
     color:#000;
-    font-size:14px;
+    font-size:12px;
     display:flex;
     flex-direction:column;
     align-items:center;
-    gap:5px;
+    gap:8px;
   }
 
   .icon span{
-    font-size:18px;
+    font-size:20px;
   }
 
   /* SAVE BUTTON */
   .save{
+    display:block;
     border:1px solid #000;
-    padding:12px;
-    margin:20px auto;
-    width:80%;
+    padding:14px;
+    margin:25px auto 40px;
+    width:85%;
     text-decoration:none;
     color:#000;
-    display:block;
     letter-spacing:2px;
+    font-size:13px;
   }
 
   /* SECTIONS */
   .section{
     text-align:left;
-    margin-top:25px;
+    margin-top:30px;
     padding-top:20px;
-    border-top:1px solid #ddd;
+    border-top:1px solid #e5e5e5;
   }
 
   .title{
-    font-size:12px;
-    letter-spacing:3px;
-    margin-bottom:10px;
+    font-size:11px;
+    letter-spacing:4px;
+    margin-bottom:12px;
   }
 
   .item{
     font-size:14px;
-    margin:6px 0;
+    margin:8px 0;
+    line-height:1.4;
   }
 
   /* SOCIAL */
   .social{
     display:flex;
     justify-content:center;
-    gap:25px;
-    margin-top:25px;
+    gap:35px;
+    margin-top:30px;
   }
 
   .social a{
-    color:#000;
     font-size:18px;
+    color:#000;
     text-decoration:none;
   }
+
 </style>
 </head>
 
 <body>
 
-<!-- NAME -->
-<div class="name">ATTY. DONNABEL CRISTAL TENORIO</div>
-<div class="sub">LAWYER</div>
-<div class="office">Cristal Tenorio Law Office</div>
+<div class="wrap">
 
-<!-- ICON ROW -->
-<div class="row">
+  <!-- NAME -->
+  <div class="name">ATTY. DONNABEL CRISTAL TENORIO</div>
+  <div class="role">LAWYER</div>
+  <div class="office">Cristal Tenorio Law Office</div>
 
-  <!-- CALL (multi numbers via tel menu is browser dependent) -->
-  <a class="icon" href="tel:+63272571802">
-    <span>📞</span>
-    Call
-  </a>
+  <!-- ICONS -->
+  <div class="icons">
 
-  <!-- EMAIL (opens both emails) -->
-  <a class="icon"
-     href="mailto:cristaltenoriolawoffice@yahoo.com,cristaltenoriolawoffice@gmail.com">
-    <span>✉️</span>
-    Email
-  </a>
+    <a class="icon" href="tel:+63272571802">
+      <span>📞</span>
+      Call
+    </a>
 
-  <!-- MAP -->
-  <a class="icon" target="_blank"
-     href="https://www.google.com/maps?q=Unit+4+Mezzanine+Area+Estrera+Building+789+J.P.+Rizal+St+Makati">
-    <span>📍</span>
-    Map
-  </a>
+    <a class="icon" href="mailto:cristaltenoriolawoffice@yahoo.com,cristaltenoriolawoffice@gmail.com">
+      <span>✉️</span>
+      Email
+    </a>
 
-</div>
+    <a class="icon" target="_blank"
+       href="https://www.google.com/maps?q=Unit+4+Mezzanine+Area+Estrera+Building+789+J.P.+Rizal+St+Makati+City">
+      <span>📍</span>
+      Map
+    </a>
 
-<!-- SAVE CONTACT -->
-<a class="save" href="data:text/vcard;charset=utf-8,
+  </div>
+
+  <!-- SAVE -->
+  <a class="save" href="data:text/vcard;charset=utf-8,
 BEGIN:VCARD
 VERSION:3.0
-FN:ATTY. DONNABEL CRISTAL TENORIO
+FN:ATTY. DONNABEL C. TENORIO
 ORG:Cristal Tenorio Law Office
 TEL;TYPE=WORK:(02)72571802
 TEL;TYPE=CELL:+639917924302
@@ -151,32 +160,35 @@ download="Attorney_Tenorio.vcf">
 + SAVE CONTACT
 </a>
 
-<!-- CONTACT -->
-<div class="section">
-  <div class="title">CONTACT</div>
-  <div class="item">Landline: (02) 725-71802</div>
-  <div class="item">Office: +63 991 792 4302</div>
-  <div class="item">Office: +63 933 812 4210</div>
-  <div class="item">Other: +63 933 854 529</div>
-</div>
-
-<!-- EMAIL -->
-<div class="section">
-  <div class="title">EMAIL</div>
-  <div class="item">Yahoo: cristaltenoriolawoffice@yahoo.com</div>
-  <div class="item">Gmail: cristaltenoriolawoffice@gmail.com</div>
-</div>
-
-<!-- FIND ME -->
-<div class="section">
-  <div class="title">FIND ME</div>
-
-  <div class="social">
-    <a href="https://www.facebook.com/cristal.tenorio.75" target="_blank">f</a>
-    <a href="https://m.me/cristal.tenorio.75" target="_blank">m</a>
-    <a href="https://wa.me/639917924302" target="_blank">w</a>
-    <a href="viber://chat?number=%2B639917924302">v</a>
+  <!-- CONTACT -->
+  <div class="section">
+    <div class="title">CONTACT</div>
+    <div class="item">Landline: (02) 725-71802</div>
+    <div class="item">Office: +63 991 792 4302</div>
+    <div class="item">Office: +63 933 812 4210</div>
+    <div class="item">Other: +63 933 854 529</div>
   </div>
+
+  <!-- EMAIL -->
+  <div class="section">
+    <div class="title">EMAIL</div>
+    <div class="item">Yahoo: cristaltenoriolawoffice@yahoo.com</div>
+    <div class="item">Gmail: cristaltenoriolawoffice@gmail.com</div>
+  </div>
+
+  <!-- FIND ME -->
+  <div class="section">
+    <div class="title">FIND ME</div>
+
+    <div class="social">
+      <a href="https://www.facebook.com/cristal.tenorio.75" target="_blank">f</a>
+      <a href="https://m.me/cristal.tenorio.75" target="_blank">m</a>
+      <a href="https://wa.me/639917924302" target="_blank">w</a>
+      <a href="viber://chat?number=%2B639917924302">v</a>
+    </div>
+
+  </div>
+
 </div>
 
 </body>
