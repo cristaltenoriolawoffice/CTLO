@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ATTY. DONNABEL C. TENORIO</title>
 
-<!-- ICON LIBRARY (REAL APP ICONS) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
@@ -42,11 +41,11 @@
     margin:12px auto 25px;
   }
 
-  /* ICON ROW (NO CIRCLES) */
+  /* ICON ROW */
   .icons{
     display:flex;
     justify-content:center;
-    gap:80px;
+    gap:55px;
     margin-bottom:25px;
   }
 
@@ -88,6 +87,13 @@
     font-size:11px;
     letter-spacing:4px;
     margin-bottom:12px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+
+  .title i{
+    font-size:14px;
   }
 
   .item{
@@ -100,11 +106,11 @@
     text-decoration:none;
   }
 
-  /* SOCIAL ICONS (REAL APP STYLE) */
+  /* SOCIAL */
   .social{
     display:flex;
     justify-content:center;
-    gap:35px;
+    gap:30px;
     margin-top:25px;
   }
 
@@ -124,23 +130,19 @@
 <div class="office">Cristal Tenorio Law Office</div>
 <div class="line"></div>
 
-<!-- ICONS -->
+<!-- ICON ROW -->
 <div class="icons">
 
-  <!-- CALL (popup) -->
-  <div class="icon" onclick="document.getElementById('callPopup').style.display='block'">
+  <a class="icon" onclick="openCall()">
     <i class="fa-solid fa-phone"></i>
     Call
-  </div>
+  </a>
 
-  <!-- EMAIL -->
-  <a class="icon"
-     href="mailto:cristaltenoriolawoffice@yahoo.com,cristaltenoriolawoffice@gmail.com">
+  <a class="icon" href="mailto:cristaltenoriolawoffice@yahoo.com,cristaltenoriolawoffice@gmail.com">
     <i class="fa-solid fa-envelope"></i>
     Email
   </a>
 
-  <!-- MAP -->
   <a class="icon" target="_blank"
      href="https://maps.google.com/?q=789+J.P.+Rizal+St+Makati+City">
     <i class="fa-solid fa-location-dot"></i>
@@ -149,18 +151,19 @@
 
 </div>
 
-<!-- SAVE CONTACT -->
+<!-- SAVE CONTACT (OPENS CONTACTS APP) -->
 <a class="save" href="data:text/vcard;charset=utf-8,
 BEGIN:VCARD
 VERSION:3.0
 FN:ATTY. DONNABEL C. TENORIO
 ORG:Cristal Tenorio Law Office
-TEL;TYPE=WORK:(02)72571802
+TEL;TYPE=WORK,VOICE:(02)72571802
 TEL;TYPE=CELL:+639917924302
 TEL;TYPE=CELL:+63933812210
 TEL;TYPE=CELL:+63933854529
-EMAIL:cristaltenoriolawoffice@yahoo.com
-EMAIL:cristaltenoriolawoffice@gmail.com
+EMAIL;TYPE=WORK:cristaltenoriolawoffice@yahoo.com
+EMAIL;TYPE=WORK:cristaltenoriolawoffice@gmail.com
+ADR:;;789 J.P. Rizal St, Makati City;;;
 END:VCARD"
 download="Attorney_Tenorio.vcf">
 + SAVE CONTACT
@@ -168,28 +171,40 @@ download="Attorney_Tenorio.vcf">
 
 <!-- CONTACT -->
 <div class="section">
-  <div class="title">CONTACT</div>
+  <div class="title"><i class="fa-solid fa-address-book"></i> CONTACT</div>
+
   <div class="item"><a href="tel:+63272571802">Landline: (02) 725-71802</a></div>
-  <div class="item"><a href="tel:+639917924302">+63 991 792 4302</a></div>
-  <div class="item"><a href="tel:+63933812210">+63 933 812 4210</a></div>
-  <div class="item"><a href="tel:+63933854529">+63 933 854 529</a></div>
+  <div class="item"><a href="tel:+639917924302">Office Mobile: +63 991 792 4302</a></div>
+  <div class="item"><a href="tel:+63933812210">Office Mobile: +63 933 812 4210</a></div>
+  <div class="item"><a href="tel:+63933854529">Other: +63 933 854 529</a></div>
 </div>
 
 <!-- EMAIL -->
 <div class="section">
-  <div class="title">EMAIL</div>
-  <div class="item"><a href="mailto:cristaltenoriolawoffice@yahoo.com">Yahoo Mail</a></div>
-  <div class="item"><a href="mailto:cristaltenoriolawoffice@gmail.com">Gmail</a></div>
+  <div class="title"><i class="fa-solid fa-envelope"></i> EMAIL</div>
+
+  <div class="item">
+    <a href="mailto:cristaltenoriolawoffice@yahoo.com">
+      Yahoo: cristaltenoriolawoffice@yahoo.com
+    </a>
+  </div>
+
+  <div class="item">
+    <a href="mailto:cristaltenoriolawoffice@gmail.com">
+      Gmail: cristaltenoriolawoffice@gmail.com
+    </a>
+  </div>
 </div>
 
 <!-- LOCATION -->
 <div class="section">
-  <div class="title">LOCATION</div>
+  <div class="title"><i class="fa-solid fa-location-dot"></i> LOCATION</div>
+
   <div class="item">
     <a target="_blank"
        href="https://maps.google.com/?q=789+J.P.+Rizal+St+Makati+City">
-      Unit 4 Mezzanine Area Estrera Building, 789 J.P. Rizal St, Makati City
-      <br><b>View Map</b>
+      Unit 4 Mezzanine Area Estrera Building, 789 J.P. Rizal St,
+      Makati City<br><b>View Map</b>
     </a>
   </div>
 </div>
@@ -199,7 +214,6 @@ download="Attorney_Tenorio.vcf">
   <div class="title">FIND ME</div>
 
   <div class="social">
-
     <a href="https://www.facebook.com/cristal.tenorio.75" target="_blank">
       <i class="fa-brands fa-facebook"></i>
     </a>
@@ -215,44 +229,27 @@ download="Attorney_Tenorio.vcf">
     <a href="viber://chat?number=%2B639917924302">
       <i class="fa-brands fa-viber"></i>
     </a>
-
   </div>
 </div>
 
-<!-- CALL POPUP -->
-<div id="callPopup" style="
-display:none;
-position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:rgba(0,0,0,0.5);
-">
+<script>
+function openCall(){
+  let choice = prompt(
+`Call Options:
+1 - Landline (02) 725-71802
+2 - 0991 792 4302
+3 - 0933 812 4210
+4 - 0933 854 529
 
-  <div style="
-  background:#fff;
-  width:80%;
-  max-width:300px;
-  margin:25% auto;
-  padding:20px;
-  text-align:left;
-  font-family:Garamond,serif;
-  ">
+Type number:`
+  );
 
-    <b>Choose number:</b><br><br>
-
-    <a href="tel:+63272571802">Landline</a><br><br>
-    <a href="tel:+639917924302">+63 991 792 4302</a><br><br>
-    <a href="tel:+63933812210">+63 933 812 4210</a><br><br>
-    <a href="tel:+63933854529">+63 933 854 529</a><br><br>
-
-    <div onclick="this.parentElement.parentElement.style.display='none'"
-         style="text-align:center;margin-top:10px;cursor:pointer;">
-      Close
-    </div>
-
-  </div>
-
-</div>
+  if(choice == "1") window.location.href="tel:+63272571802";
+  if(choice == "2") window.location.href="tel:+639917924302";
+  if(choice == "3") window.location.href="tel:+63933812210";
+  if(choice == "4") window.location.href="tel:+63933854529";
+}
+</script>
 
 </body>
 </html>
