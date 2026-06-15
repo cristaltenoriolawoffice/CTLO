@@ -12,8 +12,8 @@
     margin:0;
     padding:50px 22px;
     font-family:Garamond, serif;
-    background:#fff;
-    color:#000;
+    background:#000;
+    color:#fff;
   }
 
   .wrap{
@@ -26,23 +26,26 @@
     font-size:20px;
     letter-spacing:2px;
     text-transform:uppercase;
+    color:#fff;
   }
 
   .role{
     font-size:12px;
     letter-spacing:3px;
     margin-top:6px;
+    color:#fff;
   }
 
   .office{
     font-size:14px;
     margin-top:6px;
+    color:#fff;
   }
 
   .line{
     width:120px;
     height:1px;
-    background:#000;
+    background:#fff;
     margin:12px auto 25px;
   }
 
@@ -56,7 +59,7 @@
 
   .icon{
     text-decoration:none;
-    color:#000;
+    color:#fff;
     font-size:12px;
     display:flex;
     flex-direction:column;
@@ -66,6 +69,20 @@
 
   .icon i{
     font-size:18px;
+    color:#fff;
+  }
+
+  /* BUTTONS */
+  .btn{
+    display:block;
+    border:1px solid #fff;
+    padding:14px;
+    margin:25px auto;
+    width:85%;
+    text-decoration:none;
+    color:#fff;
+    letter-spacing:2px;
+    font-size:13px;
   }
 
   /* SECTIONS */
@@ -73,43 +90,25 @@
     text-align:left;
     margin-top:25px;
     padding-top:20px;
-    border-top:1px solid #e6e6e6;
+    border-top:1px solid #333;
   }
 
   .title{
     font-size:11px;
     letter-spacing:4px;
     margin-bottom:12px;
-    display:flex;
-    align-items:center;
-    gap:8px;
-  }
-
-  .title i{
-    font-size:14px;
+    color:#fff;
   }
 
   .item{
     font-size:14px;
     margin:10px 0;
+    color:#fff;
   }
 
   .item a{
+    color:#fff;
     text-decoration:none;
-    color:#000;
-  }
-
-  /* SAVE BUTTON */
-  .save{
-    display:block;
-    border:1px solid #000;
-    padding:14px;
-    margin:25px auto 35px;
-    width:85%;
-    text-decoration:none;
-    color:#000;
-    letter-spacing:2px;
-    font-size:13px;
   }
 
   /* SOCIAL */
@@ -122,7 +121,7 @@
 
   .social a{
     font-size:20px;
-    color:#000;
+    color:#fff;
     text-decoration:none;
   }
 
@@ -139,19 +138,22 @@
   <div class="office">Cristal Tenorio Law Office</div>
   <div class="line"></div>
 
-  <!-- ICON ROW -->
+  <!-- ICONS -->
   <div class="icons">
 
-    <a class="icon" onclick="callMenu()">
+    <!-- DIRECT CALL (NO POPUP) -->
+    <a class="icon" href="tel:+63272571802">
       <i class="fa-solid fa-phone"></i>
       Call
     </a>
 
+    <!-- EMAIL -->
     <a class="icon" href="mailto:cristaltenoriolawoffice@yahoo.com,cristaltenoriolawoffice@gmail.com">
       <i class="fa-solid fa-envelope"></i>
       Email
     </a>
 
+    <!-- MAP -->
     <a class="icon" target="_blank"
        href="https://maps.google.com/?q=789+J.P.+Rizal+St+Makati+City">
       <i class="fa-solid fa-location-dot"></i>
@@ -160,8 +162,8 @@
 
   </div>
 
-  <!-- SAVE CONTACT (OPENS CONTACT APP) -->
-  <a class="save" href="data:text/vcard;charset=utf-8,
+  <!-- SAVE CONTACT -->
+  <a class="btn" href="data:text/vcard;charset=utf-8,
 BEGIN:VCARD
 VERSION:3.0
 FN:ATTY. DONNABEL C. TENORIO
@@ -170,91 +172,61 @@ TEL;TYPE=WORK:(02)72571802
 TEL;TYPE=CELL:+639917924302
 TEL;TYPE=CELL:+63933812210
 TEL;TYPE=CELL:+63933854529
-EMAIL;TYPE=WORK:cristaltenoriolawoffice@yahoo.com
-EMAIL;TYPE=WORK:cristaltenoriolawoffice@gmail.com
-ADR:;;789 J.P. Rizal St, Brgy. Poblacion, Makati City;;;
+EMAIL:cristaltenoriolawoffice@yahoo.com
+EMAIL:cristaltenoriolawoffice@gmail.com
+ADR:;;789 J.P. Rizal St, Makati City;;;
 END:VCARD"
 download="Attorney_Tenorio.vcf">
 + SAVE CONTACT
 </a>
 
-<!-- CONTACT -->
-<div class="section">
-  <div class="title"><i class="fa-solid fa-address-book"></i> CONTACT</div>
+  <!-- CONTACT -->
+  <div class="section">
+    <div class="title">CONTACT</div>
 
-  <div class="item">
-    <i class="fa-solid fa-phone"></i>
-    Landline: <a href="tel:+63272571802">(02) 725-71802</a>
+    <div class="item">Landline: (02) 725-71802</div>
+    <div class="item">Office Mobile: +63 991 792 4302</div>
+    <div class="item">Office Mobile: +63 933 812 4210</div>
+    <div class="item">Other: +63 933 854 529</div>
   </div>
 
-  <div class="item">
-    <i class="fa-solid fa-mobile-screen"></i>
-    Office Mobile: <a href="tel:+639917924302">+63 991 792 4302</a>
+  <!-- EMAIL -->
+  <div class="section">
+    <div class="title">EMAIL</div>
+
+    <div class="item">
+      Yahoo: <a href="mailto:cristaltenoriolawoffice@yahoo.com">cristaltenoriolawoffice@yahoo.com</a>
+    </div>
+
+    <div class="item">
+      Gmail: <a href="mailto:cristaltenoriolawoffice@gmail.com">cristaltenoriolawoffice@gmail.com</a>
+    </div>
   </div>
 
-  <div class="item">
-    <i class="fa-solid fa-mobile-screen"></i>
-    Office Mobile: <a href="tel:+63933812210">+63 933 812 4210</a>
+  <!-- LOCATION -->
+  <div class="section">
+    <div class="title">LOCATION</div>
+
+    <div class="item">
+      <a target="_blank"
+         href="https://maps.google.com/?q=789+J.P.+Rizal+St+Makati+City">
+        Unit 4 Mezzanine Area Estrera Building, 789 J.P. Rizal St,
+        Brgy. Poblacion, Makati City, 1208<br><b>View Map</b>
+      </a>
+    </div>
   </div>
 
-  <div class="item">
-    <i class="fa-solid fa-phone"></i>
-    Other: <a href="tel:+63933854529">+63 933 854 529</a>
+  <!-- SOCIAL -->
+  <div class="section">
+    <div class="title">FIND ME</div>
+
+    <div class="social">
+      <a href="https://www.facebook.com/cristal.tenorio.75"><i class="fa-brands fa-facebook"></i></a>
+      <a href="https://m.me/cristal.tenorio.75"><i class="fa-brands fa-facebook-messenger"></i></a>
+      <a href="https://wa.me/639917924302"><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="viber://chat?number=%2B639917924302"><i class="fa-brands fa-viber"></i></a>
+    </div>
   </div>
-</div>
-
-<!-- EMAIL -->
-<div class="section">
-  <div class="title"><i class="fa-solid fa-envelope"></i> EMAIL</div>
-
-  <div class="item">
-    <i class="fa-solid fa-envelope"></i>
-    Yahoo: <a href="mailto:cristaltenoriolawoffice@yahoo.com">cristaltenoriolawoffice@yahoo.com</a>
-  </div>
-
-  <div class="item">
-    <i class="fa-solid fa-envelope"></i>
-    Gmail: <a href="mailto:cristaltenoriolawoffice@gmail.com">cristaltenoriolawoffice@gmail.com</a>
-  </div>
-</div>
-
-<!-- LOCATION -->
-<div class="section">
-  <div class="title"><i class="fa-solid fa-location-dot"></i> LOCATION</div>
-
-  <div class="item">
-    <i class="fa-solid fa-location-dot"></i>
-    <a target="_blank"
-       href="https://maps.google.com/?q=789+J.P.+Rizal+St+Makati+City">
-      Unit 4 Mezzanine Area Estrera Building, 789 J.P. Rizal St,
-      Brgy. Poblacion, Makati City, 1208
-      <br><b>View Map</b>
-    </a>
-  </div>
-</div>
-
-<!-- SOCIAL -->
-<div class="section">
-  <div class="title">FIND ME</div>
-
-  <div class="social">
-    <a href="https://www.facebook.com/cristal.tenorio.75"><i class="fa-brands fa-facebook"></i></a>
-    <a href="https://m.me/cristal.tenorio.75"><i class="fa-brands fa-facebook-messenger"></i></a>
-    <a href="https://wa.me/639917924302"><i class="fa-brands fa-whatsapp"></i></a>
-    <a href="viber://chat?number=%2B639917924302"><i class="fa-brands fa-viber"></i></a>
-  </div>
-</div>
-
-<script>
-function callMenu(){
-  let n = prompt("Call:\n1 Landline\n2 Mobile 1\n3 Mobile 2\n4 Other");
-
-  if(n=="1") location.href="tel:+63272571802";
-  if(n=="2") location.href="tel:+639917924302";
-  if(n=="3") location.href="tel:+63933812210";
-  if(n=="4") location.href="tel:+63933854529";
-}
-</script>
 
 </div>
 
