@@ -1,19 +1,340 @@
-BEGIN:VCARD
-VERSION:3.0
-FN:ATTY. DONNABEL C. TENORIO
-ORG:Cristal Tenorio Law Office
-TITLE:LAWYER
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATTY. DONNABEL C. TENORIO</title>
 
-TEL;TYPE=WORK,VOICE:(02)72571802
-TEL;TYPE=CELL:+639917924302
-TEL;TYPE=CELL:+63933812210
-TEL;TYPE=CELL:+63933854529
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-EMAIL;TYPE=WORK:cristaltenoriolawoffice@yahoo.com
-EMAIL;TYPE=WORK:cristaltenoriolawoffice@gmail.com
+<style>
+body{
+    margin:0;
+    padding:45px 20px;
+    font-family:Garamond, serif;
+    background:#fff;
+    color:#000;
+}
 
-ADR:;;Unit 4 Mezzanine Area Estrera Building, 789 J.P. Rizal St, Brgy. Poblacion, Makati City, 1208 Metro Manila;;;;
+.wrap{
+    max-width:420px;
+    margin:auto;
+    text-align:center;
+}
 
-URL:https://maps.google.com/?q=789+J.P.+Rizal+St+Makati+City
+.name{
+    font-size:22px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
 
-END:VCARD
+.role{
+    font-size:12px;
+    letter-spacing:3px;
+    margin-top:6px;
+}
+
+.office{
+    font-size:14px;
+    margin-top:6px;
+}
+
+.line{
+    width:120px;
+    height:1px;
+    background:#000;
+    margin:12px auto 25px;
+}
+
+/* TOP ICONS */
+.icons{
+    display:flex;
+    justify-content:center;
+    gap:55px;
+    margin-bottom:25px;
+}
+
+.icon{
+    text-decoration:none;
+    color:#000;
+    font-size:12px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+}
+
+.icon i{
+    font-size:18px;
+}
+
+/* BUTTON */
+.btn{
+    display:block;
+    border:1px solid #000;
+    padding:14px;
+    margin:25px auto;
+    width:85%;
+    text-decoration:none;
+    color:#000;
+    letter-spacing:2px;
+    font-size:13px;
+}
+
+/* SECTIONS */
+.section{
+    text-align:left;
+    margin-top:25px;
+    padding-top:20px;
+    border-top:1px solid #ddd;
+}
+
+.title{
+    font-size:11px;
+    letter-spacing:4px;
+    margin-bottom:12px;
+}
+
+.item{
+    display:flex;
+    gap:10px;
+    font-size:14px;
+    margin:10px 0;
+}
+
+.item i{
+    margin-top:3px;
+    width:16px;
+}
+
+.item a{
+    color:#000;
+    text-decoration:none;
+}
+
+/* SOCIAL */
+.social{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    margin-top:20px;
+}
+
+.social a{
+    font-size:20px;
+    color:#000;
+    text-decoration:none;
+}
+
+/* MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.5);
+}
+
+.modal-content{
+    background:#fff;
+    width:85%;
+    max-width:320px;
+    margin:140px auto;
+    padding:20px;
+    border-radius:6px;
+}
+
+.modal-content h3{
+    margin-top:0;
+    font-weight:normal;
+}
+
+.modal-content a{
+    display:block;
+    padding:12px 0;
+    border-bottom:1px solid #eee;
+    text-decoration:none;
+    color:#000;
+}
+
+.close{
+    text-align:center;
+    padding-top:15px;
+    cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<!-- HEADER -->
+<div class="name">ATTY. DONNABEL C. TENORIO</div>
+<div class="role">LAWYER</div>
+<div class="office">Cristal Tenorio Law Office</div>
+<div class="line"></div>
+
+<!-- TOP ICONS -->
+<div class="icons">
+
+<a class="icon" href="#" onclick="openCall();return false;">
+<i class="fa-solid fa-phone"></i>
+Call
+</a>
+
+<a class="icon" href="#" onclick="openEmail();return false;">
+<i class="fa-solid fa-envelope"></i>
+Email
+</a>
+
+<a class="icon" target="_blank"
+href="https://maps.google.com/?q=789+J.P.+Rizal+St+Makati+City">
+<i class="fa-solid fa-location-dot"></i>
+Map
+</a>
+
+</div>
+
+<!-- SAVE CONTACT -->
+<a class="btn" href="./Attorney_Tenorio.vcf">
++ SAVE CONTACT
+</a>
+
+<!-- CONTACT -->
+<div class="section">
+<div class="title">CONTACT</div>
+
+<div class="item">
+<i class="fa-solid fa-phone"></i>
+<a href="tel:+63272571802">Landline: (02) 725-71802</a>
+</div>
+
+<div class="item">
+<i class="fa-solid fa-mobile-screen"></i>
+<a href="tel:+639917924302">Office Mobile: +63 991 792 4302</a>
+</div>
+
+<div class="item">
+<i class="fa-solid fa-mobile-screen"></i>
+<a href="tel:+63933812210">Office Mobile: +63 933 812 4210</a>
+</div>
+
+<div class="item">
+<i class="fa-solid fa-phone-volume"></i>
+<a href="tel:+63933854529">Other: +63 933 854 529</a>
+</div>
+
+</div>
+
+<!-- EMAIL -->
+<div class="section">
+<div class="title">EMAIL</div>
+
+<div class="item">
+<i class="fa-solid fa-envelope"></i>
+<a href="mailto:cristaltenoriolawoffice@yahoo.com">Yahoo: cristaltenoriolawoffice@yahoo.com</a>
+</div>
+
+<div class="item">
+<i class="fa-solid fa-envelope"></i>
+<a href="mailto:cristaltenoriolawoffice@gmail.com">Gmail: cristaltenoriolawoffice@gmail.com</a>
+</div>
+
+</div>
+
+<!-- LOCATION -->
+<div class="section">
+<div class="title">LOCATION</div>
+
+<div class="item">
+<i class="fa-solid fa-location-dot"></i>
+<a target="_blank"
+href="https://maps.google.com/?q=789+J.P.+Rizal+St+Makati+City">
+Unit 4 Mezzanine Area Estrera Building,
+789 J.P. Rizal St, Brgy. Poblacion,
+Makati City 1208<br><b>View Map</b>
+</a>
+</div>
+
+</div>
+
+<!-- SOCIAL -->
+<div class="section">
+<div class="title">FIND ME</div>
+
+<div class="social">
+
+<a href="https://www.facebook.com/cristal.tenorio.75">
+<i class="fa-brands fa-facebook"></i>
+</a>
+
+<a href="https://m.me/cristal.tenorio.75">
+<i class="fa-brands fa-facebook-messenger"></i>
+</a>
+
+<a href="https://wa.me/639917924302">
+<i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<a href="viber://chat?number=%2B639917924302">
+<i class="fa-brands fa-viber"></i>
+</a>
+
+</div>
+</div>
+
+</div>
+
+<!-- CALL MODAL -->
+<div id="callModal" class="modal">
+<div class="modal-content">
+<h3>Choose Number</h3>
+
+<a href="tel:+63272571802">Landline (02) 725-71802</a>
+<a href="tel:+639917924302">+63 991 792 4302</a>
+<a href="tel:+63933812210">+63 933 812 4210</a>
+<a href="tel:+63933854529">+63 933 854 529</a>
+
+<div class="close" onclick="closeCall()">Close</div>
+</div>
+</div>
+
+<!-- EMAIL MODAL -->
+<div id="emailModal" class="modal">
+<div class="modal-content">
+<h3>Choose Email</h3>
+
+<a href="mailto:cristaltenoriolawoffice@yahoo.com">Yahoo Mail</a>
+<a href="mailto:cristaltenoriolawoffice@gmail.com">Gmail</a>
+
+<div class="close" onclick="closeEmail()">Close</div>
+</div>
+</div>
+
+<script>
+function openCall(){
+document.getElementById("callModal").style.display="block";
+}
+function closeCall(){
+document.getElementById("callModal").style.display="none";
+}
+
+function openEmail(){
+document.getElementById("emailModal").style.display="block";
+}
+function closeEmail(){
+document.getElementById("emailModal").style.display="none";
+}
+
+window.onclick=function(e){
+if(e.target.id==="callModal") closeCall();
+if(e.target.id==="emailModal") closeEmail();
+}
+</script>
+
+</body>
+</html>
