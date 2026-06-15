@@ -95,7 +95,6 @@ body{
     margin-bottom:12px;
 }
 
-/* ITEM */
 .item{
     display:flex;
     gap:10px;
@@ -104,13 +103,8 @@ body{
 }
 
 .item i{
-    width:18px;
     margin-top:3px;
-
-    /* OUTLINE EFFECT (YOUR REQUEST) */
-    color:#000;
-    -webkit-text-stroke: 1px #000;
-    -webkit-text-fill-color: #fff;
+    width:16px;
 }
 
 .item a{
@@ -129,6 +123,7 @@ body{
 .social a{
     font-size:20px;
     color:#000;
+    text-decoration:none;
 }
 
 /* MODAL */
@@ -169,6 +164,7 @@ body{
     padding-top:15px;
     cursor:pointer;
 }
+
 </style>
 </head>
 
@@ -191,13 +187,13 @@ Call
 </a>
 
 <a class="icon" href="#" onclick="openEmail();return false;">
-<i class="fa-regular fa-envelope"></i>
+<i class="fa-solid fa-envelope"></i>
 Email
 </a>
 
 <a class="icon" target="_blank"
 href="https://maps.google.com/?q=789+J.P.+Rizal+St+Makati+City">
-<i class="fa-regular fa-map"></i>
+<i class="fa-solid fa-location-dot"></i>
 Map
 </a>
 
@@ -213,7 +209,7 @@ Map
 <div class="title">CONTACT</div>
 
 <div class="item">
-<i class="fa-regular fa-address-book"></i>
+<i class="fa-solid fa-phone"></i>
 <a href="tel:+63272571802">Landline: (02) 725-71802</a>
 </div>
 
@@ -239,17 +235,13 @@ Map
 <div class="title">EMAIL</div>
 
 <div class="item">
-<i class="fa-brands fa-yahoo"></i>
-<a href="mailto:cristaltenoriolawoffice@yahoo.com">
-Yahoo: cristaltenoriolawoffice@yahoo.com
-</a>
+<i class="fa-solid fa-envelope"></i>
+<a href="mailto:cristaltenoriolawoffice@yahoo.com">Yahoo: cristaltenoriolawoffice@yahoo.com</a>
 </div>
 
 <div class="item">
-<i class="fa-brands fa-google"></i>
-<a href="mailto:cristaltenoriolawoffice@gmail.com">
-Gmail: cristaltenoriolawoffice@gmail.com
-</a>
+<i class="fa-solid fa-envelope"></i>
+<a href="mailto:cristaltenoriolawoffice@gmail.com">Gmail: cristaltenoriolawoffice@gmail.com</a>
 </div>
 
 </div>
@@ -259,12 +251,11 @@ Gmail: cristaltenoriolawoffice@gmail.com
 <div class="title">LOCATION</div>
 
 <div class="item">
-<i class="fa-regular fa-map"></i>
+<i class="fa-solid fa-location-dot"></i>
 <a target="_blank"
 href="https://maps.google.com/?q=789+J.P.+Rizal+St+Makati+City">
 Unit 4 Mezzanine Area Estrera Building,
-789 J.P. Rizal St,
-Brgy. Poblacion,
+789 J.P. Rizal St, Brgy. Poblacion,
 Makati City 1208<br><b>View Map</b>
 </a>
 </div>
@@ -277,10 +268,21 @@ Makati City 1208<br><b>View Map</b>
 
 <div class="social">
 
-<a href="https://www.facebook.com/cristal.tenorio.75"><i class="fa-brands fa-facebook"></i></a>
-<a href="https://m.me/cristal.tenorio.75"><i class="fa-brands fa-facebook-messenger"></i></a>
-<a href="https://wa.me/639917924302"><i class="fa-brands fa-whatsapp"></i></a>
-<a href="viber://chat?number=%2B639917924302"><i class="fa-brands fa-viber"></i></a>
+<a href="https://www.facebook.com/cristal.tenorio.75">
+<i class="fa-brands fa-facebook"></i>
+</a>
+
+<a href="https://m.me/cristal.tenorio.75">
+<i class="fa-brands fa-facebook-messenger"></i>
+</a>
+
+<a href="https://wa.me/639917924302">
+<i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<a href="viber://chat?number=%2B639917924302">
+<i class="fa-brands fa-viber"></i>
+</a>
 
 </div>
 </div>
@@ -292,7 +294,7 @@ Makati City 1208<br><b>View Map</b>
 <div class="modal-content">
 <h3>Choose Number</h3>
 
-<a href="tel:+63272571802">Landline</a>
+<a href="tel:+63272571802">Landline (02) 725-71802</a>
 <a href="tel:+639917924302">+63 991 792 4302</a>
 <a href="tel:+63933812210">+63 933 812 4210</a>
 <a href="tel:+63933854529">+63 933 854 529</a>
