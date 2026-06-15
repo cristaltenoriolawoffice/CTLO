@@ -22,23 +22,21 @@ body{
     text-align:center;
 }
 
+/* HEADER */
 .name{
     font-size:22px;
     letter-spacing:2px;
     text-transform:uppercase;
 }
-
 .role{
     font-size:12px;
     letter-spacing:3px;
     margin-top:6px;
 }
-
 .office{
     font-size:14px;
     margin-top:6px;
 }
-
 .line{
     width:120px;
     height:1px;
@@ -81,7 +79,7 @@ body{
     font-size:13px;
 }
 
-/* SECTIONS */
+/* SECTION */
 .section{
     text-align:left;
     margin-top:25px;
@@ -95,6 +93,7 @@ body{
     margin-bottom:12px;
 }
 
+/* ITEM */
 .item{
     display:flex;
     gap:10px;
@@ -103,8 +102,15 @@ body{
 }
 
 .item i{
+    width:18px;
     margin-top:3px;
-    width:16px;
+}
+
+/* ICON STYLE (OUTLINE EFFECT) */
+.item i{
+    color:#000;
+    -webkit-text-stroke: 1px #000;
+    -webkit-text-fill-color: #fff;
 }
 
 .item a{
@@ -123,7 +129,6 @@ body{
 .social a{
     font-size:20px;
     color:#000;
-    text-decoration:none;
 }
 
 /* MODAL */
@@ -164,7 +169,6 @@ body{
     padding-top:15px;
     cursor:pointer;
 }
-
 </style>
 </head>
 
@@ -186,7 +190,9 @@ body{
 Call
 </a>
 
-<a class="icon" href="#" onclick="openEmail();return false;">
+<!-- UPDATED EMAIL: SENDS TO BOTH -->
+<a class="icon"
+href="mailto:cristaltenoriolawoffice@yahoo.com?cc=cristaltenoriolawoffice@gmail.com">
 <i class="fa-solid fa-envelope"></i>
 Email
 </a>
@@ -236,12 +242,16 @@ Map
 
 <div class="item">
 <i class="fa-brands fa-yahoo"></i>
-<a href="mailto:cristaltenoriolawoffice@yahoo.com">cristaltenoriolawoffice@yahoo.com</a>
+<a href="mailto:cristaltenoriolawoffice@yahoo.com">
+Yahoo: cristaltenoriolawoffice@yahoo.com
+</a>
 </div>
 
 <div class="item">
 <i class="fa-brands fa-google"></i>
-<a href="mailto:cristaltenoriolawoffice@gmail.com">cristaltenoriolawoffice@gmail.com</a>
+<a href="mailto:cristaltenoriolawoffice@gmail.com">
+Gmail: cristaltenoriolawoffice@gmail.com
+</a>
 </div>
 
 </div>
@@ -255,8 +265,10 @@ Map
 <a target="_blank"
 href="https://maps.google.com/?q=789+J.P.+Rizal+St+Makati+City">
 Unit 4 Mezzanine Area Estrera Building,
-789 J.P. Rizal St, Brgy. Poblacion,
-Makati City 1208<br><b>View Map</b>
+789 J.P. Rizal St,
+Brgy. Poblacion,
+Makati City 1208
+<br><b>View Map</b>
 </a>
 </div>
 
@@ -294,24 +306,12 @@ Makati City 1208<br><b>View Map</b>
 <div class="modal-content">
 <h3>Choose Number</h3>
 
-<a href="tel:+63272571802">Landline (02) 725-71802</a>
+<a href="tel:+63272571802">Landline</a>
 <a href="tel:+639917924302">+63 991 792 4302</a>
 <a href="tel:+63933812210">+63 933 812 4210</a>
 <a href="tel:+63933854529">+63 933 854 529</a>
 
 <div class="close" onclick="closeCall()">Close</div>
-</div>
-</div>
-
-<!-- EMAIL MODAL -->
-<div id="emailModal" class="modal">
-<div class="modal-content">
-<h3>Choose Email</h3>
-
-<a href="mailto:cristaltenoriolawoffice@yahoo.com">Yahoo Mail</a>
-<a href="mailto:cristaltenoriolawoffice@gmail.com">Gmail</a>
-
-<div class="close" onclick="closeEmail()">Close</div>
 </div>
 </div>
 
@@ -323,16 +323,8 @@ function closeCall(){
 document.getElementById("callModal").style.display="none";
 }
 
-function openEmail(){
-document.getElementById("emailModal").style.display="block";
-}
-function closeEmail(){
-document.getElementById("emailModal").style.display="none";
-}
-
 window.onclick=function(e){
 if(e.target.id==="callModal") closeCall();
-if(e.target.id==="emailModal") closeEmail();
 }
 </script>
 
