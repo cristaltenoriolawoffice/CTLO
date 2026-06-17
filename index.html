@@ -8,111 +8,97 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-
 body{
-    font-family:Garamond, serif;
-    background:#ffffff;
-    color:#000;
     margin:0;
-    padding:40px 20px;
+    padding:45px 20px;
+    font-family:Garamond, serif;
+    background:#fff;
+    color:#000;
 }
 
-.container{
-    max-width:450px;
+.wrap{
+    max-width:420px;
     margin:auto;
-}
-
-.header{
     text-align:center;
 }
 
+/* HEADER */
 .name{
-    font-size:24px;
-    letter-spacing:1px;
+    font-size:22px;
+    letter-spacing:2px;
+    text-transform:uppercase;
 }
-
 .role{
-    font-size:13px;
+    font-size:12px;
     letter-spacing:3px;
-    margin-top:5px;
+    margin-top:6px;
 }
-
 .office{
-    margin-top:5px;
-    font-size:15px;
+    font-size:14px;
+    margin-top:6px;
 }
-
 .line{
     width:120px;
     height:1px;
     background:#000;
-    margin:12px auto 30px;
+    margin:12px auto 25px;
 }
 
-/* TOP ICONS (RESTORED LABEL STYLE) */
-.top-icons{
+/* TOP ICONS */
+.icons{
     display:flex;
     justify-content:center;
-    gap:60px;
+    gap:55px;
     margin-bottom:25px;
 }
 
-.top-icons a{
-    color:#000;
+.icon{
     text-decoration:none;
-    text-align:center;
-    font-size:13px;
+    color:#000;
+    font-size:12px;
     display:flex;
     flex-direction:column;
     align-items:center;
     gap:6px;
-    transition:opacity .25s ease;
-    -webkit-tap-highlight-color:transparent;
 }
 
-.top-icons a:hover{
-    opacity:.65;
+.icon i{
+    font-size:18px;
 }
 
-.top-icons i{
-    font-size:22px;
-}
-
-.save-btn{
+/* BUTTON */
+.btn{
     display:block;
-    text-align:center;
     border:1px solid #000;
     padding:14px;
+    margin:25px auto;
+    width:85%;
     text-decoration:none;
     color:#000;
-    margin-bottom:30px;
     letter-spacing:2px;
-    transition:opacity .25s ease;
-    -webkit-tap-highlight-color:transparent;
+    font-size:13px;
 }
 
-.save-btn:hover{
-    opacity:.65;
-}
-
+/* SECTION */
 .section{
-    border-top:1px solid #ddd;
+    text-align:left;
+    margin-top:25px;
     padding-top:20px;
-    margin-top:20px;
+    border-top:1px solid #ddd;
 }
 
-.section-title{
-    font-size:12px;
+.title{
+    font-size:11px;
     letter-spacing:4px;
-    margin-bottom:15px;
+    margin-bottom:12px;
 }
 
+/* ITEM */
 .item{
     display:flex;
-    align-items:flex-start;
-    gap:12px;
-    margin-bottom:12px;
-    font-size:15px;
+    gap:10px;
+    font-size:14px;
+    margin:10px 0;
 }
 
 .item i{
@@ -120,11 +106,19 @@ body{
     margin-top:3px;
 }
 
+/* ICON STYLE (OUTLINE EFFECT) */
+.item i{
+    color:#000;
+    -webkit-text-stroke: 1px #000;
+    -webkit-text-fill-color: #fff;
+}
+
 .item a{
     color:#000;
     text-decoration:none;
 }
 
+/* SOCIAL */
 .social{
     display:flex;
     justify-content:center;
@@ -133,33 +127,28 @@ body{
 }
 
 .social a{
+    font-size:20px;
     color:#000;
-    font-size:24px;
-    transition:opacity .25s ease;
-    -webkit-tap-highlight-color:transparent;
-}
-
-.social a:hover{
-    opacity:.65;
 }
 
 /* MODAL */
 .modal{
     display:none;
     position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.5);
-    justify-content:center;
-    align-items:center;
-    z-index:999;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.5);
 }
 
 .modal-content{
     background:#fff;
     width:85%;
-    max-width:350px;
+    max-width:320px;
+    margin:140px auto;
     padding:20px;
-    border-radius:4px;
+    border-radius:6px;
 }
 
 .modal-content h3{
@@ -170,59 +159,60 @@ body{
 .modal-content a{
     display:block;
     padding:12px 0;
+    border-bottom:1px solid #eee;
     text-decoration:none;
     color:#000;
-    border-bottom:1px solid #eee;
 }
 
 .close{
     text-align:center;
-    cursor:pointer;
     padding-top:15px;
+    cursor:pointer;
 }
-
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="wrap">
 
-<div class="header">
+<!-- HEADER -->
 <div class="name">ATTY. DONNABEL C. TENORIO</div>
 <div class="role">LAWYER</div>
 <div class="office">Cristal Tenorio Law Office</div>
 <div class="line"></div>
-</div>
 
-<!-- TOP ICONS (RESTORED) -->
-<div class="top-icons">
+<!-- TOP ICONS -->
+<div class="icons">
 
-<a href="#" onclick="openCallModal(); return false;">
+<a class="icon" href="#" onclick="openCall();return false;">
 <i class="fa-solid fa-phone"></i>
 Call
 </a>
 
-<a href="#" onclick="openEmailModal(); return false;">
+<!-- UPDATED EMAIL: SENDS TO BOTH -->
+<a class="icon"
+href="mailto:cristaltenoriolawoffice@yahoo.com?cc=cristaltenoriolawoffice@gmail.com">
 <i class="fa-solid fa-envelope"></i>
 Email
 </a>
 
-<a href="https://maps.google.com/?q=Unit+4+Mezzanine+Area+Estrera+Building,+789+J.P.+Rizal+Street,+Poblacion,+Makati+City"
-   target="_blank"
-   rel="noopener noreferrer">
+<a class="icon" target="_blank"
+href="https://maps.google.com/?q=789+J.P.+Rizal+St+Makati+City">
 <i class="fa-solid fa-location-dot"></i>
 Map
 </a>
 
 </div>
 
-<a class="save-btn" href="Attorney_Tenorio.vcf">
+<!-- SAVE CONTACT -->
+<a class="btn" href="./Attorney_Tenorio.vcf">
 + SAVE CONTACT
 </a>
 
+<!-- CONTACT -->
 <div class="section">
-<div class="section-title">CONTACT</div>
+<div class="title">CONTACT</div>
 
 <div class="item">
 <i class="fa-solid fa-phone"></i>
@@ -246,66 +236,59 @@ Map
 
 </div>
 
+<!-- EMAIL -->
 <div class="section">
-<div class="section-title">EMAIL</div>
+<div class="title">EMAIL</div>
 
 <div class="item">
 <i class="fa-brands fa-yahoo"></i>
 <a href="mailto:cristaltenoriolawoffice@yahoo.com">
-cristaltenoriolawoffice@yahoo.com
+Yahoo: cristaltenoriolawoffice@yahoo.com
 </a>
 </div>
 
 <div class="item">
 <i class="fa-brands fa-google"></i>
 <a href="mailto:cristaltenoriolawoffice@gmail.com">
-cristaltenoriolawoffice@gmail.com
+Gmail: cristaltenoriolawoffice@gmail.com
 </a>
 </div>
 
 </div>
 
+<!-- LOCATION -->
 <div class="section">
-<div class="section-title">LOCATION</div>
+<div class="title">LOCATION</div>
 
 <div class="item">
 <i class="fa-solid fa-location-dot"></i>
-<div>
-<a href="https://maps.google.com/?q=Unit+4+Mezzanine+Area+Estrera+Building,+789+J.P.+Rizal+Street,+Poblacion,+Makati+City"
-   target="_blank"
-   rel="noopener noreferrer">
-Unit 4 Mezzanine Area Estrera Building,<br>
-789 J.P. Rizal Street,<br>
-Brgy. Poblacion, Makati City 1208,<br>
-Metro Manila
-<br><br>
-<strong>View Map</strong>
+<a target="_blank"
+href="https://maps.google.com/?q=789+J.P.+Rizal+St+Makati+City">
+Unit 4 Mezzanine Area Estrera Building,
+789 J.P. Rizal St,
+Brgy. Poblacion,
+Makati City 1208
+<br><b>View Map</b>
 </a>
 </div>
-</div>
 
 </div>
 
+<!-- SOCIAL -->
 <div class="section">
-<div class="section-title">FIND ME</div>
+<div class="title">FIND ME</div>
 
 <div class="social">
 
-<a href="https://www.facebook.com/cristal.tenorio.75"
-   target="_blank"
-   rel="noopener noreferrer">
+<a href="https://www.facebook.com/cristal.tenorio.75">
 <i class="fa-brands fa-facebook"></i>
 </a>
 
-<a href="https://m.me/cristal.tenorio.75"
-   target="_blank"
-   rel="noopener noreferrer">
+<a href="https://m.me/cristal.tenorio.75">
 <i class="fa-brands fa-facebook-messenger"></i>
 </a>
 
-<a href="https://wa.me/639917924302"
-   target="_blank"
-   rel="noopener noreferrer">
+<a href="https://wa.me/639917924302">
 <i class="fa-brands fa-whatsapp"></i>
 </a>
 
@@ -321,70 +304,28 @@ Metro Manila
 <!-- CALL MODAL -->
 <div id="callModal" class="modal">
 <div class="modal-content">
+<h3>Choose Number</h3>
 
-<h3>Choose a Number</h3>
+<a href="tel:+63272571802">Landline</a>
+<a href="tel:+639917924302">+63 991 792 4302</a>
+<a href="tel:+63933812210">+63 933 812 4210</a>
+<a href="tel:+63933854529">+63 933 854 529</a>
 
-<a href="tel:+63272571802">Landline: (02) 725-71802</a>
-<a href="tel:+639917924302">Office Mobile: +63 991 792 4302</a>
-<a href="tel:+63933812210">Office Mobile: +63 933 812 4210</a>
-<a href="tel:+63933854529">Other: +63 933 854 529</a>
-
-<div class="close" onclick="closeCallModal()">Cancel</div>
-
-</div>
-</div>
-
-<!-- EMAIL MODAL -->
-<div id="emailModal" class="modal">
-<div class="modal-content">
-
-<h3>Choose Email</h3>
-
-<a href="mailto:cristaltenoriolawoffice@yahoo.com">Yahoo Mail</a>
-<a href="mailto:cristaltenoriolawoffice@gmail.com">Gmail</a>
-
-<div class="close" onclick="closeEmailModal()">Cancel</div>
-
+<div class="close" onclick="closeCall()">Close</div>
 </div>
 </div>
 
 <script>
-
-function openCallModal(){
-    document.getElementById("callModal").style.display="flex";
+function openCall(){
+document.getElementById("callModal").style.display="block";
+}
+function closeCall(){
+document.getElementById("callModal").style.display="none";
 }
 
-function closeCallModal(){
-    document.getElementById("callModal").style.display="none";
+window.onclick=function(e){
+if(e.target.id==="callModal") closeCall();
 }
-
-function openEmailModal(){
-    document.getElementById("emailModal").style.display="flex";
-}
-
-function closeEmailModal(){
-    document.getElementById("emailModal").style.display="none";
-}
-
-window.onclick = function(event){
-
-    if(event.target === document.getElementById("callModal")){
-        closeCallModal();
-    }
-
-    if(event.target === document.getElementById("emailModal")){
-        closeEmailModal();
-    }
-
-};
-
-document.addEventListener("keydown", function(e){
-    if(e.key === "Escape"){
-        closeCallModal();
-        closeEmailModal();
-    }
-});
-
 </script>
 
 </body>
