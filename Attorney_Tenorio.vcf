@@ -1,15 +1,13 @@
 BEGIN:VCARD
 VERSION:3.0
-N:Tenorio;Donnabel C.;;Atty.;
 FN:ATTY. DONNABEL C. TENORIO
 ORG:Cristal Tenorio Law Office
-TITLE:Lawyer
-TEL;TYPE=WORK,VOICE:+63272571802
+TITLE:LAWYER
+TEL;TYPE=WORK:+63272571802
 TEL;TYPE=CELL:+639917924302
 TEL;TYPE=CELL:+63933812210
-TEL;TYPE=VOICE:+639338549529
-EMAIL;TYPE=INTERNET:cristaltenoriolawoffice@yahoo.com
-EMAIL;TYPE=INTERNET:cristaltenoriolawoffice@gmail.com
+TEL;TYPE=CELL:+639338549529
+EMAIL:cristaltenoriolawoffice@yahoo.com
+EMAIL:cristaltenoriolawoffice@gmail.com
 ADR;TYPE=WORK:;;Unit 4 Mezzanine Area Estrera Building\, 789 J.P. Rizal St\, Brgy. Poblacion;Makati City;Metro Manila;1208;Philippines
-URL:https://www.facebook.com/cristal.tenorio.75
 END:VCARD
