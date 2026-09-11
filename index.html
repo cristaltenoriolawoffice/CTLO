@@ -44,10 +44,10 @@
       </button>
     </nav>
 
-    <!-- Primary actions -->
+    <!-- Primary actions (open popups) -->
     <div class="cta-row">
-      <a class="btn btn-primary" href="#appointment">Book an Appointment</a>
-      <a class="btn btn-outline" href="#payment"><i class="fa-solid fa-credit-card" aria-hidden="true"></i>Payment</a>
+      <button type="button" class="btn btn-primary" data-open="modal-appointment">Book an Appointment</button>
+      <button type="button" class="btn btn-outline" data-open="modal-payment"><i class="fa-solid fa-credit-card" aria-hidden="true"></i>Payment</button>
     </div>
     <button type="button" class="btn btn-outline btn-save-row js-save">
       <i class="fa-solid fa-user-plus" aria-hidden="true"></i> Save Contact
@@ -108,10 +108,80 @@ Makati City, Metro Manila 1208, Philippines</div>
     </div>
   </section>
 
-  <!-- ================= BOOK AN APPOINTMENT ================= -->
-  <section class="section" id="appointment" aria-labelledby="appt-title">
-    <h2 class="section-title" id="appt-title">Book an Appointment</h2>
-    <p class="section-sub">Schedule a consultation with Atty. Donnabel C. Tenorio.</p>
+  <!-- ================= FIND ME ================= -->
+  <section class="section" aria-labelledby="social-title">
+    <h2 class="section-title" id="social-title">Find Me</h2>
+    <div class="social">
+      <a href="https://www.facebook.com/cristal.tenorio.75" target="_blank" rel="noopener" aria-label="Facebook">
+        <i class="fa-brands fa-facebook" aria-hidden="true"></i>
+      </a>
+      <a href="https://m.me/cristal.tenorio.75" target="_blank" rel="noopener" aria-label="Messenger">
+        <i class="fa-brands fa-facebook-messenger" aria-hidden="true"></i>
+      </a>
+      <a href="https://wa.me/639917924302" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+      </a>
+      <a href="viber://chat?number=%2B639917924302" aria-label="Viber">
+        <i class="fa-brands fa-viber" aria-hidden="true"></i>
+      </a>
+    </div>
+  </section>
+
+  <p class="footer-note">Cristal Tenorio Law Office · Makati City</p>
+
+</main>
+
+<!-- ================= STICKY ACTION BAR ================= -->
+<nav class="bottom-bar" aria-label="Quick actions">
+  <button type="button" data-open="modal-call" aria-label="Call the office">
+    <i class="fa-solid fa-phone" aria-hidden="true"></i><span>Call</span>
+  </button>
+  <button type="button" data-open="modal-appointment" aria-label="Book an appointment">
+    <i class="fa-solid fa-calendar-check" aria-hidden="true"></i><span>Book</span>
+  </button>
+  <button type="button" data-open="modal-payment" aria-label="Payment information">
+    <i class="fa-solid fa-credit-card" aria-hidden="true"></i><span>Pay</span>
+  </button>
+  <button type="button" class="js-save" aria-label="Save the contact">
+    <i class="fa-solid fa-user-plus" aria-hidden="true"></i><span>Save</span>
+  </button>
+</nav>
+
+<!-- ================= CALL MODAL ================= -->
+<div class="modal" id="modal-call" role="dialog" aria-modal="true" aria-labelledby="modal-call-title" aria-hidden="true">
+  <div class="modal-sheet">
+    <button type="button" class="modal-x" data-close aria-label="Close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    <h3 id="modal-call-title">Call the office</h3>
+    <div class="modal-list">
+      <a href="tel:+63272571802"><span class="m-label">Landline</span><span class="m-value">+63 2 7257 1802</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
+      <a href="tel:+639917924302"><span class="m-label">Mobile</span><span class="m-value">+63 991 792 4302</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
+      <a href="tel:+639338124210"><span class="m-label">Mobile</span><span class="m-value">+63 933 812 4210</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
+      <a href="tel:+639338549529"><span class="m-label">Other</span><span class="m-value">+63 933 854 9529</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
+    </div>
+    <button type="button" class="modal-close" data-close>Close</button>
+  </div>
+</div>
+
+<!-- ================= EMAIL MODAL ================= -->
+<div class="modal" id="modal-email" role="dialog" aria-modal="true" aria-labelledby="modal-email-title" aria-hidden="true">
+  <div class="modal-sheet">
+    <button type="button" class="modal-x" data-close aria-label="Close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    <h3 id="modal-email-title">Email the office</h3>
+    <div class="modal-list">
+      <a href="mailto:cristaltenoriolawoffice@yahoo.com"><span class="m-label">Yahoo</span><span class="m-value">cristaltenoriolawoffice@yahoo.com</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
+      <a href="mailto:cristaltenoriolawoffice@gmail.com"><span class="m-label">Gmail</span><span class="m-value">cristaltenoriolawoffice@gmail.com</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
+      <a href="mailto:cristaltenoriolawoffice@yahoo.com?cc=cristaltenoriolawoffice@gmail.com"><span class="m-label">Both</span><span class="m-value">Send to both addresses</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
+    </div>
+    <button type="button" class="modal-close" data-close>Close</button>
+  </div>
+</div>
+
+<!-- ================= BOOK AN APPOINTMENT MODAL ================= -->
+<div class="modal" id="modal-appointment" role="dialog" aria-modal="true" aria-labelledby="modal-appt-title" aria-hidden="true">
+  <div class="modal-sheet">
+    <button type="button" class="modal-x" data-close aria-label="Close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    <h3 id="modal-appt-title">Book an Appointment</h3>
+    <p class="modal-sub">Schedule a consultation with Atty. Donnabel C. Tenorio.</p>
 
     <form id="appointment-form" novalidate>
       <div class="field">
@@ -167,17 +237,23 @@ Makati City, Metro Manila 1208, Philippines</div>
       <i class="fa-solid fa-circle-check big-check" aria-hidden="true"></i>
       <h3>Appointment Request Sent</h3>
       <p>Thank you. Your consultation request has been received. We will contact you to confirm your appointment.</p>
+      <p class="note color hidden" id="appt-fallback-note">Your email app should have opened with the request details — please send that email so the office receives it.</p>
       <button type="button" class="btn btn-outline btn-block" id="add-calendar">
         <i class="fa-regular fa-calendar-plus" aria-hidden="true"></i> Add to Calendar
       </button>
       <p class="note">Your appointment is confirmed only after the law office confirms your request.</p>
     </div>
-  </section>
 
-  <!-- ================= PAYMENT ================= -->
-  <section class="section" id="payment" aria-labelledby="pay-title">
-    <h2 class="section-title" id="pay-title">Payment</h2>
-    <p class="section-sub">For consultation fees and other authorized payments.</p>
+    <button type="button" class="modal-close" data-close>Close</button>
+  </div>
+</div>
+
+<!-- ================= PAYMENT MODAL ================= -->
+<div class="modal" id="modal-payment" role="dialog" aria-modal="true" aria-labelledby="modal-pay-title" aria-hidden="true">
+  <div class="modal-sheet">
+    <button type="button" class="modal-x" data-close aria-label="Close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    <h3 id="modal-pay-title">Payment</h3>
+    <p class="modal-sub">For consultation fees and other authorized payments.</p>
 
     <div class="pay-card">
       <div class="pay-head">
@@ -255,72 +331,7 @@ Makati City, Metro Manila 1208, Philippines</div>
     <button type="button" class="btn btn-outline btn-block" data-open="modal-receipt">
       <i class="fa-regular fa-paper-plane" aria-hidden="true"></i> Send Payment Receipt
     </button>
-  </section>
 
-  <!-- ================= FIND ME ================= -->
-  <section class="section" aria-labelledby="social-title">
-    <h2 class="section-title" id="social-title">Find Me</h2>
-    <div class="social">
-      <a href="https://www.facebook.com/cristal.tenorio.75" target="_blank" rel="noopener" aria-label="Facebook">
-        <i class="fa-brands fa-facebook" aria-hidden="true"></i>
-      </a>
-      <a href="https://m.me/cristal.tenorio.75" target="_blank" rel="noopener" aria-label="Messenger">
-        <i class="fa-brands fa-facebook-messenger" aria-hidden="true"></i>
-      </a>
-      <a href="https://wa.me/639917924302" target="_blank" rel="noopener" aria-label="WhatsApp">
-        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-      </a>
-      <a href="viber://chat?number=%2B639917924302" aria-label="Viber">
-        <i class="fa-brands fa-viber" aria-hidden="true"></i>
-      </a>
-    </div>
-  </section>
-
-  <p class="footer-note">Cristal Tenorio Law Office · Makati City</p>
-
-</main>
-
-<!-- ================= STICKY ACTION BAR ================= -->
-<nav class="bottom-bar" aria-label="Quick actions">
-  <button type="button" data-open="modal-call" aria-label="Call the office">
-    <i class="fa-solid fa-phone" aria-hidden="true"></i><span>Call</span>
-  </button>
-  <a href="#appointment" aria-label="Book an appointment">
-    <i class="fa-solid fa-calendar-check" aria-hidden="true"></i><span>Book</span>
-  </a>
-  <a href="#payment" aria-label="Payment information">
-    <i class="fa-solid fa-credit-card" aria-hidden="true"></i><span>Pay</span>
-  </a>
-  <button type="button" class="js-save" aria-label="Save the contact">
-    <i class="fa-solid fa-user-plus" aria-hidden="true"></i><span>Save</span>
-  </button>
-</nav>
-
-<!-- ================= CALL MODAL ================= -->
-<div class="modal" id="modal-call" role="dialog" aria-modal="true" aria-labelledby="modal-call-title" aria-hidden="true">
-  <div class="modal-sheet">
-    <button type="button" class="modal-x" data-close aria-label="Close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-    <h3 id="modal-call-title">Call the office</h3>
-    <div class="modal-list">
-      <a href="tel:+63272571802"><span class="m-label">Landline</span><span class="m-value">+63 2 7257 1802</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
-      <a href="tel:+639917924302"><span class="m-label">Mobile</span><span class="m-value">+63 991 792 4302</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
-      <a href="tel:+639338124210"><span class="m-label">Mobile</span><span class="m-value">+63 933 812 4210</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
-      <a href="tel:+639338549529"><span class="m-label">Other</span><span class="m-value">+63 933 854 9529</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
-    </div>
-    <button type="button" class="modal-close" data-close>Close</button>
-  </div>
-</div>
-
-<!-- ================= EMAIL MODAL ================= -->
-<div class="modal" id="modal-email" role="dialog" aria-modal="true" aria-labelledby="modal-email-title" aria-hidden="true">
-  <div class="modal-sheet">
-    <button type="button" class="modal-x" data-close aria-label="Close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-    <h3 id="modal-email-title">Email the office</h3>
-    <div class="modal-list">
-      <a href="mailto:cristaltenoriolawoffice@yahoo.com"><span class="m-label">Yahoo</span><span class="m-value">cristaltenoriolawoffice@yahoo.com</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
-      <a href="mailto:cristaltenoriolawoffice@gmail.com"><span class="m-label">Gmail</span><span class="m-value">cristaltenoriolawoffice@gmail.com</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
-      <a href="mailto:cristaltenoriolawoffice@yahoo.com?cc=cristaltenoriolawoffice@gmail.com"><span class="m-label">Both</span><span class="m-value">Send to both addresses</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
-    </div>
     <button type="button" class="modal-close" data-close>Close</button>
   </div>
 </div>
