@@ -81,19 +81,19 @@ function copyText(text){
 
 /* ---------------------------------------------------------------
    SAVE CONTACT
-   Builds the vCard in the browser and hands it to the device in
-   the most "save to contacts" friendly way each platform supports.
+   Builds the vCard (CRLF line endings, as the vCard spec requires)
+   and hands it to the device in the most "save to contacts" friendly
+   way each platform supports. A browser can NEVER silently write to
+   the phone's address book — the visitor always taps the final
+   confirmation, and the page never claims otherwise.
 
-   How it works on each device:
-   - Android (Chrome): Web Share API with the .vcf file is used when
-     supported, so the share sheet opens and "Contacts" / "Save to
-     contacts" appears as a handler. The user confirms there — a
-     browser can NEVER silently write to the address book.
-   - iPhone / iPad (Safari): Safari ignores the download attribute,
-     so we navigate to the vCard blob URL; iOS opens the .vcf in its
-     file/contact handler where the user taps "Add" to save.
-   - Desktop: a normal download of Attorney_Tenorio.vcf — the user
-     then imports it (Outlook / Contacts / iCloud) as usual.
+   - iPhone / iPad (Safari): navigating to a data: vCard URL opens
+     the system contact preview, where the visitor taps "Add".
+   - Android (Chrome): the .vcf is shared through the Web Share API;
+     "Contacts" / "Save to contacts" appears in the share sheet and
+     the visitor confirms there.
+   - Desktop & other browsers: the .vcf downloads normally and is
+     imported via Outlook / Contacts / iCloud as usual.
    --------------------------------------------------------------- */
 function buildVCard(){
   var lines = [
@@ -126,41 +126,38 @@ function isAndroid(){
 
 function saveContact(){
   var vcard = buildVCard();
-  var blob = new Blob([vcard], { type: "text/vcard" });
-  var url = URL.createObjectURL(blob);
-  var revoke = setTimeout(function(){ URL.revokeObjectURL(url); }, 60000);
 
-  /* Android Chrome — share the .vcf so the Contacts app can import it */
+  /* iPhone / iPad — data: vCard opens the iOS contact preview */
+  if (isIOS()){
+    var uri = "data:text/vcard;charset=utf-8," + encodeURIComponent(vcard);
+    window.location.href = uri;
+    setTimeout(function(){
+      toast("Tap “Add” to save the contact, or Share → Save to Contacts.");
+    }, 800);
+    return;
+  }
+
+  /* Android — try the system share sheet with the .vcf file so the
+     Contacts app is available as a handler */
   if (isAndroid() && navigator.share && navigator.canShare){
-    var file = new File([blob], "Attorney_Tenorio.vcf", { type: "text/vcard" });
+    var file = new File([vcard], "Attorney_Tenorio.vcf", { type: "text/vcard" });
     if (navigator.canShare({ files: [file] })){
       navigator.share({ files: [file], title: OFFICE.fullName })
-        .then(function(){ toast("Choose Contacts to save."); })
-        .catch(function(){ /* user cancelled — fall through silently */ })
-        .finally(function(){ clearTimeout(revoke); });
+        .catch(function(){ /* user cancelled — nothing to do */ });
       return;
     }
   }
 
-  /* iOS Safari — no <a download> support: open the vCard so iOS shows
-     its contact handler (the user taps "Add") */
-  if (isIOS()){
-    window.location.href = url;
-    clearTimeout(revoke);
-    setTimeout(function(){
-      toast("Choose “Open in Contacts” then Add, or tap Share → Save to Contacts.");
-    }, 600);
-    return;
-  }
-
-  /* Desktop & everything else — normal download of the .vcf file */
+  /* Desktop & other browsers — normal download of the .vcf file */
+  var blob = new Blob([vcard], { type: "text/vcard" });
+  var url = URL.createObjectURL(blob);
   var a = document.createElement("a");
   a.href = url;
   a.download = "Attorney_Tenorio.vcf";
   document.body.appendChild(a);
   a.click();
   a.remove();
-  clearTimeout(revoke);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 60000);
   toast("Contact file downloaded — open it to add to your contacts.");
 }
 
@@ -176,7 +173,7 @@ function openModal(id){
   m.classList.add("open");
   m.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
-  var first = m.querySelector("a, button, input, select, textarea");
+  var first = m.querySelector("input, select, textarea, a[href], button");
   if (first) first.focus();
 }
 
@@ -324,13 +321,16 @@ function showAppointmentSuccess(mode){
   apptForm.classList.add("hidden");
   var success = $("appt-success");
   var fb = $("appt-fallback-note");
-  if (mode === "email-fallback"){
-    fb.classList.remove("hidden");
-  } else {
-    fb.classList.add("hidden");
+  if (fb){
+    if (mode === "email-fallback"){
+      fb.classList.remove("hidden");
+    } else {
+      fb.classList.add("hidden");
+    }
   }
   success.classList.remove("hidden");
-  success.scrollIntoView({ behavior: "smooth", block: "center" });
+  var sheet = document.querySelector("#modal-appointment .modal-sheet");
+  if (sheet) sheet.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 apptForm.addEventListener("submit", async function(e){
@@ -354,15 +354,18 @@ apptForm.addEventListener("submit", async function(e){
         body: JSON.stringify(payload)
       });
       if (!res.ok) throw new Error("HTTP " + res.status);
+      apptForm.reset();
       showAppointmentSuccess("backend");
       toast("Appointment request sent.");
     } catch (err){
       /* Backend unreachable → graceful email fallback */
+      apptForm.reset();
       openAppointmentMailto(payload);
       showAppointmentSuccess("email-fallback");
     }
   } else {
     /* No endpoint configured → email fallback */
+    apptForm.reset();
     openAppointmentMailto(payload);
     showAppointmentSuccess("email-fallback");
   }
