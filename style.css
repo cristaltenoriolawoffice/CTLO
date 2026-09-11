@@ -146,6 +146,12 @@ body{
   -webkit-tap-highlight-color:transparent;
 }
 
+button.btn{
+  -webkit-appearance:none;
+  appearance:none;
+  line-height:1.2;
+}
+
 .btn-primary{
   background:var(--ink);
   border:1px solid var(--ink);
@@ -342,6 +348,8 @@ select.input{ background-image:none; }
   color:var(--gray-8);
   text-align:center;
 }
+
+.note.color{ color:var(--gray-6); }
 
 /* ---------- Success state ---------- */
 .success{
@@ -590,6 +598,19 @@ select.input{ background-image:none; }
   font-family:var(--serif);
   font-weight:600;
   font-size:20px;
+}
+
+.modal-sub{
+  margin:0 0 18px;
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:15px;
+  color:var(--gray-5);
+}
+
+.modal-sheet .success{
+  border:none;
+  padding:26px 6px;
 }
 
 .modal-x{
