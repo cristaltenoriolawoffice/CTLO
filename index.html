@@ -2,328 +2,393 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ATTY. DONNABEL C. TENORIO</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>Atty. Donnabel C. Tenorio — Cristal Tenorio Law Office | Digital Business Card</title>
+<meta name="description" content="Digital business card for Atty. Donnabel C. Tenorio, Cristal Tenorio Law Office, Makati City. Call, email, save the contact, book a consultation or send payment.">
+<meta property="og:title" content="Atty. Donnabel C. Tenorio — Cristal Tenorio Law Office">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000000'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='36' fill='%23ffffff' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<style>
-body{
-    margin:0;
-    padding:45px 20px;
-    font-family:Garamond, serif;
-    background:#fff;
-    color:#000;
-}
-
-.wrap{
-    max-width:420px;
-    margin:auto;
-    text-align:center;
-}
-
-/* HEADER */
-.name{
-    font-size:22px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-}
-.role{
-    font-size:12px;
-    letter-spacing:3px;
-    margin-top:6px;
-}
-.office{
-    font-size:14px;
-    margin-top:6px;
-}
-.line{
-    width:120px;
-    height:1px;
-    background:#000;
-    margin:12px auto 25px;
-}
-
-/* TOP ICONS */
-.icons{
-    display:flex;
-    justify-content:center;
-    gap:55px;
-    margin-bottom:25px;
-}
-
-.icon{
-    text-decoration:none;
-    color:#000;
-    font-size:12px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:6px;
-}
-
-.icon i{
-    font-size:18px;
-}
-
-/* BUTTON */
-.btn{
-    display:block;
-    border:1px solid #000;
-    padding:14px;
-    margin:25px auto;
-    width:85%;
-    text-decoration:none;
-    color:#000;
-    letter-spacing:2px;
-    font-size:13px;
-}
-
-/* SECTION */
-.section{
-    text-align:left;
-    margin-top:25px;
-    padding-top:20px;
-    border-top:1px solid #ddd;
-}
-
-.title{
-    font-size:11px;
-    letter-spacing:4px;
-    margin-bottom:12px;
-}
-
-/* ITEM */
-.item{
-    display:flex;
-    gap:10px;
-    font-size:14px;
-    margin:10px 0;
-}
-
-.item i{
-    width:18px;
-    margin-top:3px;
-}
-
-/* ICON STYLE (OUTLINE EFFECT) */
-.item i{
-    color:#000;
-    -webkit-text-stroke: 1px #000;
-    -webkit-text-fill-color: #fff;
-}
-
-.item a{
-    color:#000;
-    text-decoration:none;
-}
-
-/* SOCIAL */
-.social{
-    display:flex;
-    justify-content:center;
-    gap:30px;
-    margin-top:20px;
-}
-
-.social a{
-    font-size:20px;
-    color:#000;
-}
-
-/* MODAL */
-.modal{
-    display:none;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.5);
-}
-
-.modal-content{
-    background:#fff;
-    width:85%;
-    max-width:320px;
-    margin:140px auto;
-    padding:20px;
-    border-radius:6px;
-}
-
-.modal-content h3{
-    margin-top:0;
-    font-weight:normal;
-}
-
-.modal-content a{
-    display:block;
-    padding:12px 0;
-    border-bottom:1px solid #eee;
-    text-decoration:none;
-    color:#000;
-}
-
-.close{
-    text-align:center;
-    padding-top:15px;
-    cursor:pointer;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="wrap">
+<main class="card" id="top">
 
-<!-- HEADER -->
-<div class="name">ATTY. DONNABEL C. TENORIO</div>
-<div class="role">LAWYER</div>
-<div class="office">Cristal Tenorio Law Office</div>
-<div class="line"></div>
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <h1 class="name">Atty. Donnabel C. Tenorio</h1>
+    <p class="role">Lawyer</p>
+    <p class="office">Cristal Tenorio Law Office</p>
+    <div class="rule" role="presentation"></div>
 
-<!-- TOP ICONS -->
-<div class="icons">
+    <!-- Quick actions: Call · Email · Location · Save Contact -->
+    <nav class="icon-row" aria-label="Quick actions">
+      <button type="button" class="icon-button" data-open="modal-call" aria-label="Call the office">
+        <i class="fa-solid fa-phone" aria-hidden="true"></i><span>Call</span>
+      </button>
+      <button type="button" class="icon-button" data-open="modal-email" aria-label="Email the office">
+        <i class="fa-solid fa-envelope" aria-hidden="true"></i><span>Email</span>
+      </button>
+      <a class="icon-button" href="https://www.google.com/maps/search/?api=1&amp;query=789+J.P.+Rizal+St.%2C+Brgy.+Poblacion%2C+Makati+City%2C+Metro+Manila+1208" target="_blank" rel="noopener" aria-label="Open office location in Google Maps">
+        <i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>Location</span>
+      </a>
+      <button type="button" class="icon-button js-save" aria-label="Save the contact to your phone">
+        <i class="fa-solid fa-user-plus" aria-hidden="true"></i><span>Save Contact</span>
+      </button>
+    </nav>
 
-<a class="icon" href="#" onclick="openCall();return false;">
-<i class="fa-solid fa-phone"></i>
-</a>
+    <!-- Primary actions -->
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#appointment">Book an Appointment</a>
+      <a class="btn btn-outline" href="#payment"><i class="fa-solid fa-credit-card" aria-hidden="true"></i>Payment</a>
+    </div>
+    <button type="button" class="btn btn-outline btn-save-row js-save">
+      <i class="fa-solid fa-user-plus" aria-hidden="true"></i> Save Contact
+    </button>
+  </header>
 
-<!-- UPDATED EMAIL: SENDS TO BOTH -->
-<a class="icon"
-href="mailto:cristaltenoriolawoffice@yahoo.com?cc=cristaltenoriolawoffice@gmail.com">
-<i class="fa-solid fa-envelope"></i>
-</a>
+  <!-- ================= CONTACT ================= -->
+  <section class="section" aria-labelledby="contact-title">
+    <h2 class="section-title" id="contact-title">Contact</h2>
+    <div class="contact-list">
 
-<a class="icon" target="_blank"
-href="https://maps.google.com/?q=789+J.P.+Rizal+St+Makati+City">
-<i class="fa-solid fa-location-dot"></i>
-</a>
+      <a class="contact-item" href="tel:+63272571802">
+        <i class="fa-solid fa-phone" aria-hidden="true"></i>
+        <span class="item-label">Landline</span>
+        <span class="item-value">+63 2 7257 1802</span>
+      </a>
 
+      <a class="contact-item" href="tel:+639917924302">
+        <i class="fa-solid fa-mobile-screen" aria-hidden="true"></i>
+        <span class="item-label">Mobile</span>
+        <span class="item-value">+63 991 792 4302</span>
+      </a>
+
+      <a class="contact-item" href="tel:+639338124210">
+        <i class="fa-solid fa-mobile-screen" aria-hidden="true"></i>
+        <span class="item-label">Mobile</span>
+        <span class="item-value">+63 933 812 4210</span>
+      </a>
+
+      <a class="contact-item" href="tel:+639338549529">
+        <i class="fa-solid fa-phone-volume" aria-hidden="true"></i>
+        <span class="item-label">Other</span>
+        <span class="item-value">+63 933 854 9529</span>
+      </a>
+
+      <a class="contact-item" href="mailto:cristaltenoriolawoffice@yahoo.com">
+        <i class="fa-brands fa-yahoo" aria-hidden="true"></i>
+        <span class="item-label">Email</span>
+        <span class="item-value">cristaltenoriolawoffice@yahoo.com</span>
+      </a>
+
+      <a class="contact-item" href="mailto:cristaltenoriolawoffice@gmail.com">
+        <i class="fa-brands fa-google" aria-hidden="true"></i>
+        <span class="item-label">Email</span>
+        <span class="item-value">cristaltenoriolawoffice@gmail.com</span>
+      </a>
+
+      <div class="contact-item" role="listitem">
+        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+        <div>
+          <div class="item-value" style="white-space:pre-line;">Unit 4 Mezzanine Area, Estrera Building
+789 J.P. Rizal St., Brgy. Poblacion
+Makati City, Metro Manila 1208, Philippines</div>
+          <a class="view-map" href="https://www.google.com/maps/search/?api=1&amp;query=789+J.P.+Rizal+St.%2C+Brgy.+Poblacion%2C+Makati+City%2C+Metro+Manila+1208" target="_blank" rel="noopener">View Map</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= BOOK AN APPOINTMENT ================= -->
+  <section class="section" id="appointment" aria-labelledby="appt-title">
+    <h2 class="section-title" id="appt-title">Book an Appointment</h2>
+    <p class="section-sub">Schedule a consultation with Atty. Donnabel C. Tenorio.</p>
+
+    <form id="appointment-form" novalidate>
+      <div class="field">
+        <span class="label" id="ctype-label">Consultation type</span>
+        <div class="chip-grid" id="ctype-grid" role="radiogroup" aria-labelledby="ctype-label"></div>
+      </div>
+
+      <div class="field">
+        <label for="appt-date">Preferred date</label>
+        <input type="date" id="appt-date" class="input" required autocomplete="off">
+      </div>
+
+      <div class="field">
+        <span class="label" id="ctime-label">Preferred time</span>
+        <div class="chip-grid cols-3" id="ctime-grid" role="radiogroup" aria-labelledby="ctime-label"></div>
+      </div>
+
+      <div class="field">
+        <label for="appt-name">Full name</label>
+        <input type="text" id="appt-name" class="input" autocomplete="name" required minlength="2" placeholder="Your name">
+      </div>
+
+      <div class="field">
+        <label for="appt-mobile">Mobile number</label>
+        <input type="tel" id="appt-mobile" class="input" autocomplete="tel" required placeholder="+63 9XX XXX XXXX">
+      </div>
+
+      <div class="field">
+        <label for="appt-email">Email address</label>
+        <input type="email" id="appt-email" class="input" autocomplete="email" required placeholder="you@example.com">
+      </div>
+
+      <div class="field">
+        <label for="appt-msg">Brief reason for consultation</label>
+        <textarea id="appt-msg" class="input" rows="3" maxlength="500" placeholder="Optional — tell us briefly what you need help with"></textarea>
+      </div>
+
+      <!-- Honeypot (spam trap) — humans never see this field -->
+      <div class="hp-field" aria-hidden="true">
+        <label for="appt-company">Company</label>
+        <input type="text" id="appt-company" tabindex="-1" autocomplete="off">
+      </div>
+
+      <p class="error" id="appt-error" role="alert"></p>
+
+      <button type="submit" class="btn btn-primary btn-block">Request Appointment</button>
+
+      <p class="privacy-note">Your information is used only to process this consultation request.</p>
+    </form>
+
+    <!-- Success state (shown after the request is sent) -->
+    <div class="success hidden" id="appt-success" role="status">
+      <i class="fa-solid fa-circle-check big-check" aria-hidden="true"></i>
+      <h3>Appointment Request Sent</h3>
+      <p>Thank you. Your consultation request has been received. We will contact you to confirm your appointment.</p>
+      <button type="button" class="btn btn-outline btn-block" id="add-calendar">
+        <i class="fa-regular fa-calendar-plus" aria-hidden="true"></i> Add to Calendar
+      </button>
+      <p class="note">Your appointment is confirmed only after the law office confirms your request.</p>
+    </div>
+  </section>
+
+  <!-- ================= PAYMENT ================= -->
+  <section class="section" id="payment" aria-labelledby="pay-title">
+    <h2 class="section-title" id="pay-title">Payment</h2>
+    <p class="section-sub">For consultation fees and other authorized payments.</p>
+
+    <div class="pay-card">
+      <div class="pay-head">
+        <span class="pay-bank">Metrobank</span>
+        <button type="button" class="copy-btn" data-copy="234-3-234-85796-8" aria-label="Copy Metrobank account number">
+          <i class="fa-regular fa-copy" aria-hidden="true"></i><span>Copy</span>
+        </button>
+      </div>
+      <div class="pay-row"><span>Account Name</span><b>Donnabel C. Tenorio</b></div>
+      <div class="pay-row"><span>Account Type</span><b>Savings</b></div>
+      <div class="pay-row"><span>Account Number</span><b class="acct">234-3-234-85796-8</b></div>
+    </div>
+
+    <div class="pay-card">
+      <div class="pay-head">
+        <span class="pay-bank">BDO</span>
+        <button type="button" class="copy-btn" data-copy="004078014983" aria-label="Copy BDO account number">
+          <i class="fa-regular fa-copy" aria-hidden="true"></i><span>Copy</span>
+        </button>
+      </div>
+      <div class="pay-row"><span>Account Name</span><b>Donnabel C. Tenorio</b></div>
+      <div class="pay-row"><span>Account Type</span><b>Current</b></div>
+      <div class="pay-row"><span>Account Number</span><b class="acct">004078014983</b></div>
+    </div>
+
+    <div class="pay-card">
+      <div class="pay-head">
+        <span class="pay-bank">GoTyme</span>
+        <button type="button" class="copy-btn" data-copy="015242977284" aria-label="Copy GoTyme account number">
+          <i class="fa-regular fa-copy" aria-hidden="true"></i><span>Copy</span>
+        </button>
+      </div>
+      <div class="pay-row"><span>Account Name</span><b>Donnabel C. Tenorio</b></div>
+      <div class="pay-row"><span>Account Type</span><b>Savings</b></div>
+      <div class="pay-row"><span>Account Number</span><b class="acct">015242977284</b></div>
+    </div>
+
+    <div class="pay-card">
+      <div class="pay-head">
+        <span class="pay-bank">GCash</span>
+        <button type="button" class="copy-btn" data-copy="09178892981" aria-label="Copy GCash mobile number">
+          <i class="fa-regular fa-copy" aria-hidden="true"></i><span>Copy</span>
+        </button>
+      </div>
+      <div class="pay-row"><span>Account Name</span><b>Donnabel C. Tenorio</b></div>
+      <div class="pay-row"><span>Account Type</span><b>Savings</b></div>
+      <div class="pay-row">
+        <span>Mobile Number</span>
+        <b><a class="gcash-tel" href="tel:+639178892981">0917 889 2981</a></b>
+      </div>
+    </div>
+
+    <!--
+      PAYMENT QR CODES (optional)
+      Drop real QR images at:
+        payment-qr/metrobank.png
+        payment-qr/bdo.png
+        payment-qr/gotyme.png
+        payment-qr/gcash.png
+      The area below shows automatically only for QR images that exist.
+      Missing images are hidden — no fake QR codes are generated.
+    -->
+    <div class="qr-area" id="qr-area">
+      <p class="qr-title">Scan to pay</p>
+      <div class="qr-grid">
+        <div class="qr-holder"><img src="payment-qr/metrobank.png" alt="Metrobank QR code" onerror="this.closest('.qr-holder').classList.add('no-qr')"></div>
+        <div class="qr-holder"><img src="payment-qr/bdo.png" alt="BDO QR code" onerror="this.closest('.qr-holder').classList.add('no-qr')"></div>
+        <div class="qr-holder"><img src="payment-qr/gotyme.png" alt="GoTyme QR code" onerror="this.closest('.qr-holder').classList.add('no-qr')"></div>
+        <div class="qr-holder"><img src="payment-qr/gcash.png" alt="GCash QR code" onerror="this.closest('.qr-holder').classList.add('no-qr')"></div>
+      </div>
+    </div>
+
+    <p class="pay-notice"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Please verify the account name and payment details before sending payment. Send your payment receipt through the designated communication channel.</p>
+
+    <button type="button" class="btn btn-outline btn-block" data-open="modal-receipt">
+      <i class="fa-regular fa-paper-plane" aria-hidden="true"></i> Send Payment Receipt
+    </button>
+  </section>
+
+  <!-- ================= FIND ME ================= -->
+  <section class="section" aria-labelledby="social-title">
+    <h2 class="section-title" id="social-title">Find Me</h2>
+    <div class="social">
+      <a href="https://www.facebook.com/cristal.tenorio.75" target="_blank" rel="noopener" aria-label="Facebook">
+        <i class="fa-brands fa-facebook" aria-hidden="true"></i>
+      </a>
+      <a href="https://m.me/cristal.tenorio.75" target="_blank" rel="noopener" aria-label="Messenger">
+        <i class="fa-brands fa-facebook-messenger" aria-hidden="true"></i>
+      </a>
+      <a href="https://wa.me/639917924302" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+      </a>
+      <a href="viber://chat?number=%2B639917924302" aria-label="Viber">
+        <i class="fa-brands fa-viber" aria-hidden="true"></i>
+      </a>
+    </div>
+  </section>
+
+  <p class="footer-note">Cristal Tenorio Law Office · Makati City</p>
+
+</main>
+
+<!-- ================= STICKY ACTION BAR ================= -->
+<nav class="bottom-bar" aria-label="Quick actions">
+  <button type="button" data-open="modal-call" aria-label="Call the office">
+    <i class="fa-solid fa-phone" aria-hidden="true"></i><span>Call</span>
+  </button>
+  <a href="#appointment" aria-label="Book an appointment">
+    <i class="fa-solid fa-calendar-check" aria-hidden="true"></i><span>Book</span>
+  </a>
+  <a href="#payment" aria-label="Payment information">
+    <i class="fa-solid fa-credit-card" aria-hidden="true"></i><span>Pay</span>
+  </a>
+  <button type="button" class="js-save" aria-label="Save the contact">
+    <i class="fa-solid fa-user-plus" aria-hidden="true"></i><span>Save</span>
+  </button>
+</nav>
+
+<!-- ================= CALL MODAL ================= -->
+<div class="modal" id="modal-call" role="dialog" aria-modal="true" aria-labelledby="modal-call-title" aria-hidden="true">
+  <div class="modal-sheet">
+    <button type="button" class="modal-x" data-close aria-label="Close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    <h3 id="modal-call-title">Call the office</h3>
+    <div class="modal-list">
+      <a href="tel:+63272571802"><span class="m-label">Landline</span><span class="m-value">+63 2 7257 1802</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
+      <a href="tel:+639917924302"><span class="m-label">Mobile</span><span class="m-value">+63 991 792 4302</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
+      <a href="tel:+639338124210"><span class="m-label">Mobile</span><span class="m-value">+63 933 812 4210</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
+      <a href="tel:+639338549529"><span class="m-label">Other</span><span class="m-value">+63 933 854 9529</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
+    </div>
+    <button type="button" class="modal-close" data-close>Close</button>
+  </div>
 </div>
 
-<!-- SAVE CONTACT -->
-<a class="btn" href="./Attorney_Tenorio.vcf">
-+ SAVE CONTACT
-</a>
-
-<!-- CONTACT -->
-<div class="section">
-<div class="title">CONTACT</div>
-
-<div class="item">
-<i class="fa-solid fa-phone"></i>
-<a href="tel:0272571802">Landline: (02) 725-71802</a>
+<!-- ================= EMAIL MODAL ================= -->
+<div class="modal" id="modal-email" role="dialog" aria-modal="true" aria-labelledby="modal-email-title" aria-hidden="true">
+  <div class="modal-sheet">
+    <button type="button" class="modal-x" data-close aria-label="Close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    <h3 id="modal-email-title">Email the office</h3>
+    <div class="modal-list">
+      <a href="mailto:cristaltenoriolawoffice@yahoo.com"><span class="m-label">Yahoo</span><span class="m-value">cristaltenoriolawoffice@yahoo.com</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
+      <a href="mailto:cristaltenoriolawoffice@gmail.com"><span class="m-label">Gmail</span><span class="m-value">cristaltenoriolawoffice@gmail.com</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
+      <a href="mailto:cristaltenoriolawoffice@yahoo.com?cc=cristaltenoriolawoffice@gmail.com"><span class="m-label">Both</span><span class="m-value">Send to both addresses</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
+    </div>
+    <button type="button" class="modal-close" data-close>Close</button>
+  </div>
 </div>
 
-<div class="item">
-<i class="fa-solid fa-mobile-screen"></i>
-<a href="tel:+639917924302">Office Mobile: +63 991 792 4302</a>
+<!-- ================= PAYMENT RECEIPT MODAL ================= -->
+<div class="modal" id="modal-receipt" role="dialog" aria-modal="true" aria-labelledby="modal-receipt-title" aria-hidden="true">
+  <div class="modal-sheet">
+    <button type="button" class="modal-x" data-close aria-label="Close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    <h3 id="modal-receipt-title">Send Payment Receipt</h3>
+    <form id="receipt-form" novalidate>
+      <div class="field">
+        <label for="rec-name">Name</label>
+        <input type="text" id="rec-name" class="input" autocomplete="name" required minlength="2" placeholder="Your name">
+      </div>
+      <div class="field">
+        <label for="rec-email">Email</label>
+        <input type="email" id="rec-email" class="input" autocomplete="email" required placeholder="you@example.com">
+      </div>
+      <div class="field">
+        <label for="rec-mobile">Mobile number</label>
+        <input type="tel" id="rec-mobile" class="input" autocomplete="tel" required placeholder="+63 9XX XXX XXXX">
+      </div>
+      <div class="field">
+        <label for="rec-method">Payment method</label>
+        <select id="rec-method" class="input" required>
+          <option value="">Select method…</option>
+          <option>Metrobank</option>
+          <option>BDO</option>
+          <option>GoTyme</option>
+          <option>GCash</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="rec-amount">Amount</label>
+        <input type="text" id="rec-amount" class="input" required inputmode="decimal" placeholder="e.g. 2,500.00">
+      </div>
+      <div class="field">
+        <label for="rec-ref">Reference number</label>
+        <input type="text" id="rec-ref" class="input" required placeholder="Transaction reference">
+      </div>
+      <div class="field">
+        <label for="rec-date">Date of payment</label>
+        <input type="date" id="rec-date" class="input" required autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="rec-file">Screenshot / receipt (optional)</label>
+        <input type="file" id="rec-file" class="input" accept="image/*,.pdf">
+      </div>
+
+      <!-- Honeypot (spam trap) -->
+      <div class="hp-field" aria-hidden="true">
+        <label for="rec-company">Company</label>
+        <input type="text" id="rec-company" tabindex="-1" autocomplete="off">
+      </div>
+
+      <p class="error" id="rec-error" role="alert"></p>
+
+      <button type="submit" class="btn btn-primary btn-block">Send Receipt</button>
+      <p class="privacy-note" id="rec-hint">If the office's secure upload is not set up yet, your email app will open with these details prefilled — please attach your screenshot there and send.</p>
+    </form>
+  </div>
 </div>
 
-<div class="item">
-<i class="fa-solid fa-mobile-screen"></i>
-<a href="tel:+63933812210">Office Mobile: +63 933 812 4210</a>
-</div>
+<!-- Toast notification -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<div class="item">
-<i class="fa-solid fa-phone-volume"></i>
-<a href="tel:+639338549529">Other: +63 933 854 9529</a>
-</div>
-
-</div>
-
-<!-- EMAIL -->
-<div class="section">
-<div class="title">EMAIL</div>
-
-<div class="item">
-<i class="fa-brands fa-yahoo"></i>
-<a href="mailto:cristaltenoriolawoffice@yahoo.com">
- cristaltenoriolawoffice@yahoo.com
-</a>
-</div>
-
-<div class="item">
-<i class="fa-brands fa-google"></i>
-<a href="mailto:cristaltenoriolawoffice@gmail.com">
- cristaltenoriolawoffice@gmail.com
-</a>
-</div>
-
-</div>
-
-<!-- LOCATION -->
-<div class="section">
-<div class="title">LOCATION</div>
-
-<div class="item">
-<i class="fa-solid fa-location-dot"></i>
-<a target="_blank"
-href="https://maps.google.com/?q=789+J.P.+Rizal+St+Makati+City">
-Unit 4 Mezzanine Area Estrera Building,
-789 J.P. Rizal St,
-Brgy. Poblacion,
-Makati City 1208
-<br><b>View Map</b>
-</a>
-</div>
-
-</div>
-
-<!-- SOCIAL -->
-<div class="section">
-<div class="title">FIND ME</div>
-
-<div class="social">
-
-<a href="https://www.facebook.com/cristal.tenorio.75">
-<i class="fa-brands fa-facebook"></i>
-</a>
-
-<a href="https://m.me/cristal.tenorio.75">
-<i class="fa-brands fa-facebook-messenger"></i>
-</a>
-
-<a href="https://wa.me/639917924302">
-<i class="fa-brands fa-whatsapp"></i>
-</a>
-
-<a href="viber://chat?number=%2B639917924302">
-<i class="fa-brands fa-viber"></i>
-</a>
-
-</div>
-</div>
-
-</div>
-
-<!-- CALL MODAL -->
-<div id="callModal" class="modal">
-<div class="modal-content">
-<h3>Choose Number</h3>
-
-<a href="tel:0272571802">Landline</a>
-<a href="tel:+639917924302">+63 991 792 4302</a>
-<a href="tel:+63933812210">+63 933 812 4210</a>
-<a href="tel:+639338549529">+63 933 854 9529</a>
-
-<div class="close" onclick="closeCall()">Close</div>
-</div>
-</div>
-
-<script>
-function openCall(){
-document.getElementById("callModal").style.display="block";
-}
-function closeCall(){
-document.getElementById("callModal").style.display="none";
-}
-
-window.onclick=function(e){
-if(e.target.id==="callModal") closeCall();
-}
-</script>
-
+<script src="script.js" defer></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
