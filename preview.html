@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#ffffff">
 <title>Atty. Donnabel C. Tenorio — Cristal Tenorio Law Office | Digital Business Card</title>
-<meta name="description" content="Digital business card for Atty. Donnabel C. Tenorio, Cristal Tenorio Law Office, Makati City. Call, email, save the contact, book a consultation or send payment.">
+<meta name="description" content="Digital business card for Atty. Donnabel C. Tenorio, Cristal Tenorio Law Office, Makati City. Call, email, save the contact or book a consultation.">
 <meta property="og:title" content="Atty. Donnabel C. Tenorio — Cristal Tenorio Law Office">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000000'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='36' fill='%23ffffff' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
@@ -42,7 +42,7 @@ html{ scroll-behavior:smooth; }
 
 body{
   margin:0;
-  padding:0 18px calc(96px + env(safe-area-inset-bottom));
+  padding:0 18px 48px;
   background:var(--paper);
   color:var(--ink);
   font-family:var(--sans);
@@ -67,12 +67,13 @@ body{
 .name{
   margin:0;
   font-family:var(--serif);
-  font-size:26px;
+  font-size:clamp(18px, 5.2vw, 24px);
   font-weight:600;
   letter-spacing:1px;
   text-transform:uppercase;
   text-align:center;
   line-height:1.25;
+  white-space:nowrap;   /* always one line */
 }
 
 .role{
@@ -100,12 +101,12 @@ body{
   margin:20px auto 26px;
 }
 
-/* ---------- Quick action icons ---------- */
+/* ---------- Quick action icons (no circles) ---------- */
 .icon-row{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:repeat(3,1fr);
   gap:10px;
-  max-width:360px;
+  max-width:320px;
   margin:0 auto;
 }
 
@@ -128,22 +129,14 @@ body{
 }
 
 .icon-button i{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:48px;
-  height:48px;
-  border:1px solid var(--ink);
-  border-radius:50%;
-  font-size:17px;
+  font-size:20px;
   color:var(--ink);
-  transition:background-color .25s ease, color .25s ease;
+  transition:opacity .2s ease;
 }
 
 .icon-button:hover i,
 .icon-button:focus-visible i{
-  background:var(--ink);
-  color:var(--paper);
+  opacity:.55;
 }
 
 /* ---------- Buttons ---------- */
@@ -397,111 +390,6 @@ select.input{ background-image:none; }
 
 .hidden{ display:none !important; }
 
-/* ---------- Payment ---------- */
-.pay-card{
-  border:1px solid var(--line-soft);
-  padding:16px 16px 12px;
-  margin-bottom:14px;
-}
-
-.pay-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:12px;
-}
-
-.pay-bank{
-  font-family:var(--serif);
-  font-weight:600;
-  font-size:19px;
-}
-
-.copy-btn{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  border:1px solid var(--ink);
-  background:var(--paper);
-  color:var(--ink);
-  font-family:var(--sans);
-  font-size:10px;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  padding:7px 12px;
-  cursor:pointer;
-  transition:background-color .2s ease, color .2s ease;
-}
-
-.copy-btn:hover{
-  background:var(--ink);
-  color:var(--paper);
-}
-
-.copy-btn.copied{ background:var(--ink); color:var(--paper); }
-
-.pay-row{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  padding:5px 0;
-  font-size:13px;
-  line-height:1.5;
-}
-
-.pay-row span{ color:var(--gray-6); white-space:nowrap; }
-.pay-row b{ font-weight:500; text-align:right; word-break:break-all; }
-.pay-row .acct{ letter-spacing:.5px; }
-
-.gcash-tel{
-  color:var(--ink);
-  font-weight:500;
-  text-decoration:underline dotted;
-}
-
-/* QR codes (hidden until real images are added) */
-.qr-area{ margin:20px 0; text-align:center; }
-
-.qr-title{
-  margin:0 0 12px;
-  font-size:10px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  color:var(--gray-8);
-}
-
-.qr-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-  max-width:230px;
-  margin:0 auto;
-}
-
-.qr-holder{
-  border:1px solid var(--line-faint);
-  padding:6px;
-}
-
-.qr-holder img{
-  display:block;
-  width:100%;
-  height:auto;
-}
-
-.qr-holder.no-qr{ display:none; }
-
-.pay-notice{
-  margin:20px 0;
-  padding:12px 0;
-  border-top:1px solid var(--line-faint);
-  font-size:12px;
-  line-height:1.65;
-  color:var(--gray-6);
-}
-
-.pay-notice i{ margin-right:6px; }
-
 /* ---------- Social ---------- */
 .social{
   display:flex;
@@ -537,45 +425,6 @@ select.input{ background-image:none; }
   text-transform:uppercase;
   color:var(--gray-9);
 }
-
-/* ---------- Sticky bottom action bar ---------- */
-.bottom-bar{
-  position:fixed;
-  left:0;
-  right:0;
-  bottom:0;
-  z-index:60;
-  max-width:460px;
-  margin:0 auto;
-  display:flex;
-  background:rgba(255,255,255,.97);
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
-  border-top:1px solid var(--line-soft);
-  padding-bottom:env(safe-area-inset-bottom);
-}
-
-.bottom-bar a,
-.bottom-bar button{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:4px;
-  padding:9px 0 7px;
-  border:none;
-  background:none;
-  font-family:var(--sans);
-  font-size:9.5px;
-  letter-spacing:1px;
-  text-transform:uppercase;
-  color:var(--ink);
-  text-decoration:none;
-  cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
-}
-
-.bottom-bar i{ font-size:17px; }
 
 /* ---------- Modals (bottom sheet) ---------- */
 .modal{
@@ -697,7 +546,7 @@ select.input{ background-image:none; }
 .toast{
   position:fixed;
   left:50%;
-  bottom:calc(84px + env(safe-area-inset-bottom));
+  bottom:40px;
   z-index:120;
   transform:translateX(-50%) translateY(8px);
   max-width:88%;
@@ -750,7 +599,7 @@ select.input{ background-image:none; }
     <p class="office">Cristal Tenorio Law Office</p>
     <div class="rule" role="presentation"></div>
 
-    <!-- Quick actions: Call · Email · Location · Save Contact -->
+    <!-- Quick actions (icon only, no circles): Call · Email · Location -->
     <nav class="icon-row" aria-label="Quick actions">
       <button type="button" class="icon-button" data-open="modal-call" aria-label="Call the office">
         <i class="fa-solid fa-phone" aria-hidden="true"></i><span>Call</span>
@@ -761,59 +610,47 @@ select.input{ background-image:none; }
       <a class="icon-button" href="https://www.google.com/maps/search/?api=1&amp;query=789+J.P.+Rizal+St.%2C+Brgy.+Poblacion%2C+Makati+City%2C+Metro+Manila+1208" target="_blank" rel="noopener" aria-label="Open office location in Google Maps">
         <i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>Location</span>
       </a>
-      <button type="button" class="icon-button js-save" aria-label="Save the contact to your phone">
-        <i class="fa-solid fa-user-plus" aria-hidden="true"></i><span>Save Contact</span>
-      </button>
     </nav>
 
-    <!-- Primary actions (open popups) -->
+    <!-- Primary action tabs -->
     <div class="cta-row">
-      <button type="button" class="btn btn-primary" data-open="modal-appointment">Book an Appointment</button>
-      <button type="button" class="btn btn-outline" data-open="modal-payment"><i class="fa-solid fa-credit-card" aria-hidden="true"></i>Payment</button>
+      <button type="button" class="btn btn-outline" data-open="modal-appointment">Book an Appointment</button>
+      <button type="button" class="btn btn-outline btn-save-row js-save"><i class="fa-solid fa-user-plus" aria-hidden="true"></i> Save Contact</button>
     </div>
-    <button type="button" class="btn btn-outline btn-save-row js-save">
-      <i class="fa-solid fa-user-plus" aria-hidden="true"></i> Save Contact
-    </button>
   </header>
 
-  <!-- ================= CONTACT ================= -->
+  <!-- ================= CONTACT (numbers only, clickable) ================= -->
   <section class="section" aria-labelledby="contact-title">
     <h2 class="section-title" id="contact-title">Contact</h2>
     <div class="contact-list">
 
       <a class="contact-item" href="tel:+63272571802">
         <i class="fa-solid fa-phone" aria-hidden="true"></i>
-        <span class="item-label">Landline</span>
-        <span class="item-value">+63 2 7257 1802</span>
+        <span class="item-value">02 7257 1802</span>
       </a>
 
       <a class="contact-item" href="tel:+639917924302">
         <i class="fa-solid fa-mobile-screen" aria-hidden="true"></i>
-        <span class="item-label">Mobile</span>
         <span class="item-value">+63 991 792 4302</span>
       </a>
 
       <a class="contact-item" href="tel:+639338124210">
         <i class="fa-solid fa-mobile-screen" aria-hidden="true"></i>
-        <span class="item-label">Mobile</span>
         <span class="item-value">+63 933 812 4210</span>
       </a>
 
       <a class="contact-item" href="tel:+639338549529">
         <i class="fa-solid fa-phone-volume" aria-hidden="true"></i>
-        <span class="item-label">Other</span>
         <span class="item-value">+63 933 854 9529</span>
       </a>
 
       <a class="contact-item" href="mailto:cristaltenoriolawoffice@yahoo.com">
         <i class="fa-brands fa-yahoo" aria-hidden="true"></i>
-        <span class="item-label">Email</span>
         <span class="item-value">cristaltenoriolawoffice@yahoo.com</span>
       </a>
 
       <a class="contact-item" href="mailto:cristaltenoriolawoffice@gmail.com">
         <i class="fa-brands fa-google" aria-hidden="true"></i>
-        <span class="item-label">Email</span>
         <span class="item-value">cristaltenoriolawoffice@gmail.com</span>
       </a>
 
@@ -853,32 +690,16 @@ Makati City, Metro Manila 1208, Philippines</div>
 
 </main>
 
-<!-- ================= STICKY ACTION BAR ================= -->
-<nav class="bottom-bar" aria-label="Quick actions">
-  <button type="button" data-open="modal-call" aria-label="Call the office">
-    <i class="fa-solid fa-phone" aria-hidden="true"></i><span>Call</span>
-  </button>
-  <button type="button" data-open="modal-appointment" aria-label="Book an appointment">
-    <i class="fa-solid fa-calendar-check" aria-hidden="true"></i><span>Book</span>
-  </button>
-  <button type="button" data-open="modal-payment" aria-label="Payment information">
-    <i class="fa-solid fa-credit-card" aria-hidden="true"></i><span>Pay</span>
-  </button>
-  <button type="button" class="js-save" aria-label="Save the contact">
-    <i class="fa-solid fa-user-plus" aria-hidden="true"></i><span>Save</span>
-  </button>
-</nav>
-
 <!-- ================= CALL MODAL ================= -->
 <div class="modal" id="modal-call" role="dialog" aria-modal="true" aria-labelledby="modal-call-title" aria-hidden="true">
   <div class="modal-sheet">
     <button type="button" class="modal-x" data-close aria-label="Close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
     <h3 id="modal-call-title">Call the office</h3>
     <div class="modal-list">
-      <a href="tel:+63272571802"><span class="m-label">Landline</span><span class="m-value">+63 2 7257 1802</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
-      <a href="tel:+639917924302"><span class="m-label">Mobile</span><span class="m-value">+63 991 792 4302</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
-      <a href="tel:+639338124210"><span class="m-label">Mobile</span><span class="m-value">+63 933 812 4210</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
-      <a href="tel:+639338549529"><span class="m-label">Other</span><span class="m-value">+63 933 854 9529</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
+      <a href="tel:+63272571802"><span class="m-value">02 7257 1802</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
+      <a href="tel:+639917924302"><span class="m-value">+63 991 792 4302</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
+      <a href="tel:+639338124210"><span class="m-value">+63 933 812 4210</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
+      <a href="tel:+639338549529"><span class="m-value">+63 933 854 9529</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
     </div>
     <button type="button" class="modal-close" data-close>Close</button>
   </div>
@@ -890,9 +711,9 @@ Makati City, Metro Manila 1208, Philippines</div>
     <button type="button" class="modal-x" data-close aria-label="Close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
     <h3 id="modal-email-title">Email the office</h3>
     <div class="modal-list">
-      <a href="mailto:cristaltenoriolawoffice@yahoo.com"><span class="m-label">Yahoo</span><span class="m-value">cristaltenoriolawoffice@yahoo.com</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
-      <a href="mailto:cristaltenoriolawoffice@gmail.com"><span class="m-label">Gmail</span><span class="m-value">cristaltenoriolawoffice@gmail.com</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
-      <a href="mailto:cristaltenoriolawoffice@yahoo.com?cc=cristaltenoriolawoffice@gmail.com"><span class="m-label">Both</span><span class="m-value">Send to both addresses</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
+      <a href="mailto:cristaltenoriolawoffice@yahoo.com"><span class="m-value">cristaltenoriolawoffice@yahoo.com</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
+      <a href="mailto:cristaltenoriolawoffice@gmail.com"><span class="m-value">cristaltenoriolawoffice@gmail.com</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
+      <a href="mailto:cristaltenoriolawoffice@yahoo.com?cc=cristaltenoriolawoffice@gmail.com"><span class="m-value">Send to both addresses</span><i class="fa-solid fa-chevron-right m-chevron" aria-hidden="true"></i></a>
     </div>
     <button type="button" class="modal-close" data-close>Close</button>
   </div>
@@ -918,7 +739,7 @@ Makati City, Metro Manila 1208, Philippines</div>
 
       <div class="field">
         <span class="label" id="ctime-label">Preferred time</span>
-        <div class="chip-grid cols-3" id="ctime-grid" role="radiogroup" aria-labelledby="ctime-label"></div>
+        <div class="chip-grid" id="ctime-grid" role="radiogroup" aria-labelledby="ctime-label"></div>
       </div>
 
       <div class="field">
@@ -949,7 +770,7 @@ Makati City, Metro Manila 1208, Philippines</div>
 
       <p class="error" id="appt-error" role="alert"></p>
 
-      <button type="submit" class="btn btn-primary btn-block">Request Appointment</button>
+      <button type="submit" class="btn btn-outline btn-block">Request Appointment</button>
 
       <p class="privacy-note">Your information is used only to process this consultation request.</p>
     </form>
@@ -970,154 +791,6 @@ Makati City, Metro Manila 1208, Philippines</div>
   </div>
 </div>
 
-<!-- ================= PAYMENT MODAL ================= -->
-<div class="modal" id="modal-payment" role="dialog" aria-modal="true" aria-labelledby="modal-pay-title" aria-hidden="true">
-  <div class="modal-sheet">
-    <button type="button" class="modal-x" data-close aria-label="Close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-    <h3 id="modal-pay-title">Payment</h3>
-    <p class="modal-sub">For consultation fees and other authorized payments.</p>
-
-    <div class="pay-card">
-      <div class="pay-head">
-        <span class="pay-bank">Metrobank</span>
-        <button type="button" class="copy-btn" data-copy="234-3-234-85796-8" aria-label="Copy Metrobank account number">
-          <i class="fa-regular fa-copy" aria-hidden="true"></i><span>Copy</span>
-        </button>
-      </div>
-      <div class="pay-row"><span>Account Name</span><b>Donnabel C. Tenorio</b></div>
-      <div class="pay-row"><span>Account Type</span><b>Savings</b></div>
-      <div class="pay-row"><span>Account Number</span><b class="acct">234-3-234-85796-8</b></div>
-    </div>
-
-    <div class="pay-card">
-      <div class="pay-head">
-        <span class="pay-bank">BDO</span>
-        <button type="button" class="copy-btn" data-copy="004078014983" aria-label="Copy BDO account number">
-          <i class="fa-regular fa-copy" aria-hidden="true"></i><span>Copy</span>
-        </button>
-      </div>
-      <div class="pay-row"><span>Account Name</span><b>Donnabel C. Tenorio</b></div>
-      <div class="pay-row"><span>Account Type</span><b>Current</b></div>
-      <div class="pay-row"><span>Account Number</span><b class="acct">004078014983</b></div>
-    </div>
-
-    <div class="pay-card">
-      <div class="pay-head">
-        <span class="pay-bank">GoTyme</span>
-        <button type="button" class="copy-btn" data-copy="015242977284" aria-label="Copy GoTyme account number">
-          <i class="fa-regular fa-copy" aria-hidden="true"></i><span>Copy</span>
-        </button>
-      </div>
-      <div class="pay-row"><span>Account Name</span><b>Donnabel C. Tenorio</b></div>
-      <div class="pay-row"><span>Account Type</span><b>Savings</b></div>
-      <div class="pay-row"><span>Account Number</span><b class="acct">015242977284</b></div>
-    </div>
-
-    <div class="pay-card">
-      <div class="pay-head">
-        <span class="pay-bank">GCash</span>
-        <button type="button" class="copy-btn" data-copy="09178892981" aria-label="Copy GCash mobile number">
-          <i class="fa-regular fa-copy" aria-hidden="true"></i><span>Copy</span>
-        </button>
-      </div>
-      <div class="pay-row"><span>Account Name</span><b>Donnabel C. Tenorio</b></div>
-      <div class="pay-row"><span>Account Type</span><b>Savings</b></div>
-      <div class="pay-row">
-        <span>Mobile Number</span>
-        <b><a class="gcash-tel" href="tel:+639178892981">0917 889 2981</a></b>
-      </div>
-    </div>
-
-    <!--
-      PAYMENT QR CODES (optional)
-      Drop real QR images at:
-        payment-qr/metrobank.png
-        payment-qr/bdo.png
-        payment-qr/gotyme.png
-        payment-qr/gcash.png
-      The area below shows automatically only for QR images that exist.
-      Missing images are hidden — no fake QR codes are generated.
-    -->
-    <div class="qr-area" id="qr-area">
-      <p class="qr-title">Scan to pay</p>
-      <div class="qr-grid">
-        <div class="qr-holder"><img src="payment-qr/metrobank.png" alt="Metrobank QR code" onerror="this.closest('.qr-holder').classList.add('no-qr')"></div>
-        <div class="qr-holder"><img src="payment-qr/bdo.png" alt="BDO QR code" onerror="this.closest('.qr-holder').classList.add('no-qr')"></div>
-        <div class="qr-holder"><img src="payment-qr/gotyme.png" alt="GoTyme QR code" onerror="this.closest('.qr-holder').classList.add('no-qr')"></div>
-        <div class="qr-holder"><img src="payment-qr/gcash.png" alt="GCash QR code" onerror="this.closest('.qr-holder').classList.add('no-qr')"></div>
-      </div>
-    </div>
-
-    <p class="pay-notice"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Please verify the account name and payment details before sending payment. Send your payment receipt through the designated communication channel.</p>
-
-    <button type="button" class="btn btn-outline btn-block" data-open="modal-receipt">
-      <i class="fa-regular fa-paper-plane" aria-hidden="true"></i> Send Payment Receipt
-    </button>
-
-    <button type="button" class="modal-close" data-close>Close</button>
-  </div>
-</div>
-
-<!-- ================= PAYMENT RECEIPT MODAL ================= -->
-<div class="modal" id="modal-receipt" role="dialog" aria-modal="true" aria-labelledby="modal-receipt-title" aria-hidden="true">
-  <div class="modal-sheet">
-    <button type="button" class="modal-x" data-close aria-label="Close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-    <h3 id="modal-receipt-title">Send Payment Receipt</h3>
-    <form id="receipt-form" novalidate>
-      <div class="field">
-        <label for="rec-name">Name</label>
-        <input type="text" id="rec-name" class="input" autocomplete="name" required minlength="2" placeholder="Your name">
-      </div>
-      <div class="field">
-        <label for="rec-email">Email</label>
-        <input type="email" id="rec-email" class="input" autocomplete="email" required placeholder="you@example.com">
-      </div>
-      <div class="field">
-        <label for="rec-mobile">Mobile number</label>
-        <input type="tel" id="rec-mobile" class="input" autocomplete="tel" required placeholder="+63 9XX XXX XXXX">
-      </div>
-      <div class="field">
-        <label for="rec-method">Payment method</label>
-        <select id="rec-method" class="input" required>
-          <option value="">Select method…</option>
-          <option>Metrobank</option>
-          <option>BDO</option>
-          <option>GoTyme</option>
-          <option>GCash</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="rec-amount">Amount</label>
-        <input type="text" id="rec-amount" class="input" required inputmode="decimal" placeholder="e.g. 2,500.00">
-      </div>
-      <div class="field">
-        <label for="rec-ref">Reference number</label>
-        <input type="text" id="rec-ref" class="input" required placeholder="Transaction reference">
-      </div>
-      <div class="field">
-        <label for="rec-date">Date of payment</label>
-        <input type="date" id="rec-date" class="input" required autocomplete="off">
-      </div>
-      <div class="field">
-        <label for="rec-file">Screenshot / receipt (optional)</label>
-        <input type="file" id="rec-file" class="input" accept="image/*,.pdf">
-      </div>
-
-      <!-- Honeypot (spam trap) -->
-      <div class="hp-field" aria-hidden="true">
-        <label for="rec-company">Company</label>
-        <input type="text" id="rec-company" tabindex="-1" autocomplete="off">
-      </div>
-
-      <p class="error" id="rec-error" role="alert"></p>
-
-      <button type="submit" class="btn btn-primary btn-block">Send Receipt</button>
-      <p class="privacy-note" id="rec-hint">If the office's secure upload is not set up yet, your email app will open with these details prefilled — please attach your screenshot there and send.</p>
-    </form>
-  </div>
-</div>
-
 <!-- Toast notification -->
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -1133,17 +806,10 @@ Makati City, Metro Manila 1208, Philippines</div>
       Leave as "" (empty) to use the built-in fallback: the visitor's
       email app opens with the request prefilled to BOTH office emails.
 
-   2) PAYMENT_RECEIPT_ENDPOINT
-      Paste the URL of your secure backend / serverless upload endpoint
-      for payment receipts, e.g.  "https://yourdomain.com/api/receipt"
-      Leave as "" to use the fallback: the visitor's email app opens
-      prefilled with the receipt details (they attach the screenshot).
-
    NEVER put API keys, email passwords or secrets in this file.
    ===================================================================== */
 
 var APPOINTMENT_ENDPOINT = "";
-var PAYMENT_RECEIPT_ENDPOINT = "";
 
 /* Office constants — edit here if contact details ever change */
 var OFFICE = {
@@ -1153,12 +819,11 @@ var OFFICE = {
   formalName: "ATTY. DONNABEL C. TENORIO",
   org: "Cristal Tenorio Law Office",
   title: "Lawyer",
-  landline: "+63272571802",
+  landline: "+63272571802",                              /* tel: link format */
   mobiles: ["+639917924302", "+639338124210", "+639338549529"],
   email1: "cristaltenoriolawoffice@yahoo.com",
   email2: "cristaltenoriolawoffice@gmail.com",
-  address: "Unit 4 Mezzanine Area, Estrera Building, 789 J.P. Rizal St., Brgy. Poblacion, Makati City, Metro Manila 1208, Philippines",
-  addressLines: "Unit 4 Mezzanine Area, Estrera Building\n789 J.P. Rizal St., Brgy. Poblacion\nMakati City, Metro Manila 1208, Philippines"
+  address: "Unit 4 Mezzanine Area, Estrera Building, 789 J.P. Rizal St., Brgy. Poblacion, Makati City, Metro Manila 1208, Philippines"
 };
 
 /* ---------------------------------------------------------------
@@ -1181,43 +846,21 @@ function localIso(d){
   return y + "-" + m + "-" + day;
 }
 
-function copyText(text){
-  if (navigator.clipboard && window.isSecureContext){
-    return navigator.clipboard.writeText(text);
-  }
-  return new Promise(function(resolve, reject){
-    var ta = document.createElement("textarea");
-    ta.value = text;
-    ta.setAttribute("readonly", "");
-    ta.style.position = "fixed";
-    ta.style.opacity = "0";
-    document.body.appendChild(ta);
-    ta.select();
-    try {
-      document.execCommand("copy");
-      resolve();
-    } catch(e){
-      reject(e);
-    }
-    ta.remove();
-  });
-}
-
 /* ---------------------------------------------------------------
    SAVE CONTACT
-   Builds the vCard (CRLF line endings, as the vCard spec requires)
-   and hands it to the device in the most "save to contacts" friendly
-   way each platform supports. A browser can NEVER silently write to
-   the phone's address book — the visitor always taps the final
-   confirmation, and the page never claims otherwise.
+   A browser is not allowed to silently write to the phone's address
+   book, so "Save Contact" opens the phone's own contact-save screen
+   with every field pre-filled — the visitor taps the final Add.
 
-   - iPhone / iPad (Safari): navigating to a data: vCard URL opens
-     the system contact preview, where the visitor taps "Add".
-   - Android (Chrome): the .vcf is shared through the Web Share API;
-     "Contacts" / "Save to contacts" appears in the share sheet and
-     the visitor confirms there.
-   - Desktop & other browsers: the .vcf downloads normally and is
-     imported via Outlook / Contacts / iCloud as usual.
+   - iPhone / iPad: the vCard opens as a data link; iOS displays the
+     contact preview card where the visitor taps "Add" (or Share →
+     Save to Contacts). This is the closest thing to a direct save
+     that Safari allows.
+   - Android (Chrome): the .vcf file is shared through the system
+     share sheet, where "Contacts / Save to contacts" appears and
+     opens the new-contact screen pre-filled.
+   - Desktop: the .vcf downloads and is imported via Outlook /
+     Google Contacts / iCloud as usual.
    --------------------------------------------------------------- */
 function buildVCard(){
   var lines = [
@@ -1251,28 +894,33 @@ function isAndroid(){
 function saveContact(){
   var vcard = buildVCard();
 
-  /* iPhone / iPad — data: vCard opens the iOS contact preview */
+  /* iPhone / iPad — data: vCard link opens the iOS contact preview */
   if (isIOS()){
-    var uri = "data:text/vcard;charset=utf-8," + encodeURIComponent(vcard);
-    window.location.href = uri;
+    var uri = "data:text/vcard;charset=utf-8;base64," +
+      btoa(unescape(encodeURIComponent(vcard)));
+    var a = document.createElement("a");
+    a.href = uri;
+    a.download = "Attorney_Tenorio.vcf";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
     setTimeout(function(){
-      toast("Tap “Add” to save the contact, or Share → Save to Contacts.");
-    }, 800);
+      toast("Your phone is opening the contact — tap “Add” to save it.");
+    }, 700);
     return;
   }
 
-  /* Android — try the system share sheet with the .vcf file so the
-     Contacts app is available as a handler */
+  /* Android — system share sheet with the .vcf file */
   if (isAndroid() && navigator.share && navigator.canShare){
     var file = new File([vcard], "Attorney_Tenorio.vcf", { type: "text/vcard" });
     if (navigator.canShare({ files: [file] })){
       navigator.share({ files: [file], title: OFFICE.fullName })
-        .catch(function(){ /* user cancelled — nothing to do */ });
+        .catch(function(){ /* user cancelled */ });
       return;
     }
   }
 
-  /* Desktop & other browsers — normal download of the .vcf file */
+  /* Desktop & other browsers — download the .vcf */
   var blob = new Blob([vcard], { type: "text/vcard" });
   var url = URL.createObjectURL(blob);
   var a = document.createElement("a");
@@ -1332,7 +980,7 @@ window.addEventListener("keydown", function(e){
 /* ---------------------------------------------------------------
    Chips (single-select radiogroups)
    --------------------------------------------------------------- */
-function buildChips(containerId, options, selectedClass){
+function buildChips(containerId, options){
   var grid = $(containerId);
   if (!grid) return function(){ return ""; };
   var selected = "";
@@ -1362,9 +1010,10 @@ var getConsultationType = buildChips(
   ["Initial Consultation", "Legal Consultation", "Follow-up Consultation", "Other"]
 );
 
+/* Preferred time: 10:00 AM – 2:00 PM only */
 var getTimeSlot = buildChips(
   "ctime-grid",
-  ["09:00 AM","10:00 AM","11:00 AM","01:00 PM","02:00 PM","03:00 PM","04:00 PM","05:00 PM"]
+  ["10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM"]
 );
 
 /* ---------------------------------------------------------------
@@ -1482,13 +1131,11 @@ apptForm.addEventListener("submit", async function(e){
       showAppointmentSuccess("backend");
       toast("Appointment request sent.");
     } catch (err){
-      /* Backend unreachable → graceful email fallback */
       apptForm.reset();
       openAppointmentMailto(payload);
       showAppointmentSuccess("email-fallback");
     }
   } else {
-    /* No endpoint configured → email fallback */
     apptForm.reset();
     openAppointmentMailto(payload);
     showAppointmentSuccess("email-fallback");
@@ -1496,9 +1143,7 @@ apptForm.addEventListener("submit", async function(e){
 });
 
 /* ---------------------------------------------------------------
-   Add to Calendar (.ics) — shown after a request is submitted.
-   The event is saved to the visitor's calendar; the appointment is
-   still only CONFIRMED once the law office confirms the request.
+   Add to Calendar (.ics)
    --------------------------------------------------------------- */
 function escapeIcs(s){
   return String(s || "").replace(/\\/g, "\\\\")
@@ -1526,7 +1171,7 @@ function buildIcs(p){
   var parts = p.appointmentDate.split("-");
   var tm = parseTime(p.appointmentTime);
   var start = new Date(+parts[0], +parts[1] - 1, +parts[2], tm.h, tm.m, 0);
-  var end = new Date(start.getTime() + 60 * 60 * 1000); /* 1-hour slot */
+  var end = new Date(start.getTime() + 60 * 60 * 1000);
 
   function localStamp(d){
     return d.getFullYear() +
@@ -1584,127 +1229,6 @@ $("add-calendar").addEventListener("click", function(){
   a.remove();
   toast("Calendar file downloaded — open it to add.");
   setTimeout(function(){ URL.revokeObjectURL(url); }, 60000);
-});
-
-/* ---------------------------------------------------------------
-   Copy account numbers (payment)
-   --------------------------------------------------------------- */
-document.querySelectorAll(".copy-btn").forEach(function(btn){
-  btn.addEventListener("click", function(){
-    var value = btn.getAttribute("data-copy");
-    copyText(value)
-      .then(function(){
-        btn.classList.add("copied");
-        var span = btn.querySelector("span");
-        if (span) span.textContent = "Copied";
-        toast("Account number copied.");
-        setTimeout(function(){
-          btn.classList.remove("copied");
-          if (span) span.textContent = "Copy";
-        }, 2200);
-      })
-      .catch(function(){
-        toast("Could not copy — long-press the account number instead.");
-      });
-  });
-});
-
-/* Show the QR area only when at least one real QR image exists */
-function checkQrArea(){
-  var area = $("qr-area");
-  if (!area) return;
-  var holders = area.querySelectorAll(".qr-holder");
-  var visible = false;
-  holders.forEach(function(h){
-    if (!h.classList.contains("no-qr")) visible = true;
-  });
-  if (!visible) area.classList.add("hidden");
-}
-window.addEventListener("load", checkQrArea);
-
-/* ---------------------------------------------------------------
-   Payment receipt form
-   --------------------------------------------------------------- */
-var receiptForm = $("receipt-form");
-var recError = $("rec-error");
-
-function validateReceipt(){
-  var name = $("rec-name").value.trim();
-  var email = $("rec-email").value.trim();
-  var mobile = $("rec-mobile").value.trim();
-  var method = $("rec-method").value;
-  var ref = $("rec-ref").value.trim();
-
-  if (name.length < 2) return "Please enter your name.";
-  if (!isValidEmail(email)) return "Please enter a valid email address.";
-  if (!isValidPhone(mobile)) return "Please enter a valid mobile number.";
-  if (!method) return "Please select the payment method.";
-  if (!$("rec-amount").value.trim()) return "Please enter the amount.";
-  if (!ref) return "Please enter the reference number.";
-  if (!$("rec-date").value) return "Please enter the date of payment.";
-  return "";
-}
-
-function openReceiptMailto(){
-  var subject = "Payment Receipt — " + $("rec-name").value.trim() + " — " + $("rec-amount").value.trim();
-  var body =
-    "Payment Receipt Details\n\n" +
-    "Name: " + $("rec-name").value.trim() + "\n" +
-    "Email: " + $("rec-email").value.trim() + "\n" +
-    "Mobile: " + $("rec-mobile").value.trim() + "\n" +
-    "Payment Method: " + $("rec-method").value + "\n" +
-    "Amount: " + $("rec-amount").value.trim() + "\n" +
-    "Reference Number: " + $("rec-ref").value.trim() + "\n" +
-    "Date of Payment: " + $("rec-date").value + "\n" +
-    "Submitted: " + new Date().toISOString() + "\n" +
-    "Source: digital business card (QR/NFC)\n\n" +
-    "Note: please attach a screenshot of your payment receipt to this email before sending.";
-  var mailto = "mailto:" + OFFICE.email2 +
-    "?cc=" + encodeURIComponent(OFFICE.email1) +
-    "&subject=" + encodeURIComponent(subject) +
-    "&body=" + encodeURIComponent(body);
-  window.location.href = mailto;
-}
-
-receiptForm.addEventListener("submit", async function(e){
-  e.preventDefault();
-  setError(recError, "");
-
-  if ($("rec-company").value !== ""){ /* honeypot */ closeModal($("modal-receipt")); return; }
-
-  var problem = validateReceipt();
-  if (problem){ setError(recError, problem); return; }
-
-  if (PAYMENT_RECEIPT_ENDPOINT){
-    try {
-      var fd = new FormData();
-      fd.append("name", $("rec-name").value.trim());
-      fd.append("email", $("rec-email").value.trim());
-      fd.append("mobile", $("rec-mobile").value.trim());
-      fd.append("paymentMethod", $("rec-method").value);
-      fd.append("amount", $("rec-amount").value.trim());
-      fd.append("referenceNumber", $("rec-ref").value.trim());
-      fd.append("dateOfPayment", $("rec-date").value);
-      var fileInput = $("rec-file");
-      if (fileInput.files.length) fd.append("receiptFile", fileInput.files[0]);
-      fd.append("timestamp", new Date().toISOString());
-      fd.append("source", "digital business card (QR/NFC)");
-
-      var res = await fetch(PAYMENT_RECEIPT_ENDPOINT, { method: "POST", body: fd });
-      if (!res.ok) throw new Error("HTTP " + res.status);
-      closeModal($("modal-receipt"));
-      receiptForm.reset();
-      toast("Receipt sent. Thank you!");
-    } catch (err){
-      openReceiptMailto();
-      closeModal($("modal-receipt"));
-      toast("Email app opened — please send the receipt email.");
-    }
-  } else {
-    openReceiptMailto();
-    closeModal($("modal-receipt"));
-    toast("Email app opened — please send the receipt email.");
-  }
 });
 
 /* ---------------------------------------------------------------
