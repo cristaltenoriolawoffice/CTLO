@@ -9,17 +9,10 @@
       Leave as "" (empty) to use the built-in fallback: the visitor's
       email app opens with the request prefilled to BOTH office emails.
 
-   2) PAYMENT_RECEIPT_ENDPOINT
-      Paste the URL of your secure backend / serverless upload endpoint
-      for payment receipts, e.g.  "https://yourdomain.com/api/receipt"
-      Leave as "" to use the fallback: the visitor's email app opens
-      prefilled with the receipt details (they attach the screenshot).
-
    NEVER put API keys, email passwords or secrets in this file.
    ===================================================================== */
 
 var APPOINTMENT_ENDPOINT = "";
-var PAYMENT_RECEIPT_ENDPOINT = "";
 
 /* Office constants — edit here if contact details ever change */
 var OFFICE = {
@@ -29,12 +22,11 @@ var OFFICE = {
   formalName: "ATTY. DONNABEL C. TENORIO",
   org: "Cristal Tenorio Law Office",
   title: "Lawyer",
-  landline: "+63272571802",
+  landline: "+63272571802",                              /* tel: link format */
   mobiles: ["+639917924302", "+639338124210", "+639338549529"],
   email1: "cristaltenoriolawoffice@yahoo.com",
   email2: "cristaltenoriolawoffice@gmail.com",
-  address: "Unit 4 Mezzanine Area, Estrera Building, 789 J.P. Rizal St., Brgy. Poblacion, Makati City, Metro Manila 1208, Philippines",
-  addressLines: "Unit 4 Mezzanine Area, Estrera Building\n789 J.P. Rizal St., Brgy. Poblacion\nMakati City, Metro Manila 1208, Philippines"
+  address: "Unit 4 Mezzanine Area, Estrera Building, 789 J.P. Rizal St., Brgy. Poblacion, Makati City, Metro Manila 1208, Philippines"
 };
 
 /* ---------------------------------------------------------------
@@ -57,43 +49,21 @@ function localIso(d){
   return y + "-" + m + "-" + day;
 }
 
-function copyText(text){
-  if (navigator.clipboard && window.isSecureContext){
-    return navigator.clipboard.writeText(text);
-  }
-  return new Promise(function(resolve, reject){
-    var ta = document.createElement("textarea");
-    ta.value = text;
-    ta.setAttribute("readonly", "");
-    ta.style.position = "fixed";
-    ta.style.opacity = "0";
-    document.body.appendChild(ta);
-    ta.select();
-    try {
-      document.execCommand("copy");
-      resolve();
-    } catch(e){
-      reject(e);
-    }
-    ta.remove();
-  });
-}
-
 /* ---------------------------------------------------------------
    SAVE CONTACT
-   Builds the vCard (CRLF line endings, as the vCard spec requires)
-   and hands it to the device in the most "save to contacts" friendly
-   way each platform supports. A browser can NEVER silently write to
-   the phone's address book — the visitor always taps the final
-   confirmation, and the page never claims otherwise.
+   A browser is not allowed to silently write to the phone's address
+   book, so "Save Contact" opens the phone's own contact-save screen
+   with every field pre-filled — the visitor taps the final Add.
 
-   - iPhone / iPad (Safari): navigating to a data: vCard URL opens
-     the system contact preview, where the visitor taps "Add".
-   - Android (Chrome): the .vcf is shared through the Web Share API;
-     "Contacts" / "Save to contacts" appears in the share sheet and
-     the visitor confirms there.
-   - Desktop & other browsers: the .vcf downloads normally and is
-     imported via Outlook / Contacts / iCloud as usual.
+   - iPhone / iPad: the vCard opens as a data link; iOS displays the
+     contact preview card where the visitor taps "Add" (or Share →
+     Save to Contacts). This is the closest thing to a direct save
+     that Safari allows.
+   - Android (Chrome): the .vcf file is shared through the system
+     share sheet, where "Contacts / Save to contacts" appears and
+     opens the new-contact screen pre-filled.
+   - Desktop: the .vcf downloads and is imported via Outlook /
+     Google Contacts / iCloud as usual.
    --------------------------------------------------------------- */
 function buildVCard(){
   var lines = [
@@ -127,28 +97,33 @@ function isAndroid(){
 function saveContact(){
   var vcard = buildVCard();
 
-  /* iPhone / iPad — data: vCard opens the iOS contact preview */
+  /* iPhone / iPad — data: vCard link opens the iOS contact preview */
   if (isIOS()){
-    var uri = "data:text/vcard;charset=utf-8," + encodeURIComponent(vcard);
-    window.location.href = uri;
+    var uri = "data:text/vcard;charset=utf-8;base64," +
+      btoa(unescape(encodeURIComponent(vcard)));
+    var a = document.createElement("a");
+    a.href = uri;
+    a.download = "Attorney_Tenorio.vcf";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
     setTimeout(function(){
-      toast("Tap “Add” to save the contact, or Share → Save to Contacts.");
-    }, 800);
+      toast("Your phone is opening the contact — tap “Add” to save it.");
+    }, 700);
     return;
   }
 
-  /* Android — try the system share sheet with the .vcf file so the
-     Contacts app is available as a handler */
+  /* Android — system share sheet with the .vcf file */
   if (isAndroid() && navigator.share && navigator.canShare){
     var file = new File([vcard], "Attorney_Tenorio.vcf", { type: "text/vcard" });
     if (navigator.canShare({ files: [file] })){
       navigator.share({ files: [file], title: OFFICE.fullName })
-        .catch(function(){ /* user cancelled — nothing to do */ });
+        .catch(function(){ /* user cancelled */ });
       return;
     }
   }
 
-  /* Desktop & other browsers — normal download of the .vcf file */
+  /* Desktop & other browsers — download the .vcf */
   var blob = new Blob([vcard], { type: "text/vcard" });
   var url = URL.createObjectURL(blob);
   var a = document.createElement("a");
@@ -208,7 +183,7 @@ window.addEventListener("keydown", function(e){
 /* ---------------------------------------------------------------
    Chips (single-select radiogroups)
    --------------------------------------------------------------- */
-function buildChips(containerId, options, selectedClass){
+function buildChips(containerId, options){
   var grid = $(containerId);
   if (!grid) return function(){ return ""; };
   var selected = "";
@@ -238,9 +213,10 @@ var getConsultationType = buildChips(
   ["Initial Consultation", "Legal Consultation", "Follow-up Consultation", "Other"]
 );
 
+/* Preferred time: 10:00 AM – 2:00 PM only */
 var getTimeSlot = buildChips(
   "ctime-grid",
-  ["09:00 AM","10:00 AM","11:00 AM","01:00 PM","02:00 PM","03:00 PM","04:00 PM","05:00 PM"]
+  ["10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM"]
 );
 
 /* ---------------------------------------------------------------
@@ -358,13 +334,11 @@ apptForm.addEventListener("submit", async function(e){
       showAppointmentSuccess("backend");
       toast("Appointment request sent.");
     } catch (err){
-      /* Backend unreachable → graceful email fallback */
       apptForm.reset();
       openAppointmentMailto(payload);
       showAppointmentSuccess("email-fallback");
     }
   } else {
-    /* No endpoint configured → email fallback */
     apptForm.reset();
     openAppointmentMailto(payload);
     showAppointmentSuccess("email-fallback");
@@ -372,9 +346,7 @@ apptForm.addEventListener("submit", async function(e){
 });
 
 /* ---------------------------------------------------------------
-   Add to Calendar (.ics) — shown after a request is submitted.
-   The event is saved to the visitor's calendar; the appointment is
-   still only CONFIRMED once the law office confirms the request.
+   Add to Calendar (.ics)
    --------------------------------------------------------------- */
 function escapeIcs(s){
   return String(s || "").replace(/\\/g, "\\\\")
@@ -402,7 +374,7 @@ function buildIcs(p){
   var parts = p.appointmentDate.split("-");
   var tm = parseTime(p.appointmentTime);
   var start = new Date(+parts[0], +parts[1] - 1, +parts[2], tm.h, tm.m, 0);
-  var end = new Date(start.getTime() + 60 * 60 * 1000); /* 1-hour slot */
+  var end = new Date(start.getTime() + 60 * 60 * 1000);
 
   function localStamp(d){
     return d.getFullYear() +
@@ -460,127 +432,6 @@ $("add-calendar").addEventListener("click", function(){
   a.remove();
   toast("Calendar file downloaded — open it to add.");
   setTimeout(function(){ URL.revokeObjectURL(url); }, 60000);
-});
-
-/* ---------------------------------------------------------------
-   Copy account numbers (payment)
-   --------------------------------------------------------------- */
-document.querySelectorAll(".copy-btn").forEach(function(btn){
-  btn.addEventListener("click", function(){
-    var value = btn.getAttribute("data-copy");
-    copyText(value)
-      .then(function(){
-        btn.classList.add("copied");
-        var span = btn.querySelector("span");
-        if (span) span.textContent = "Copied";
-        toast("Account number copied.");
-        setTimeout(function(){
-          btn.classList.remove("copied");
-          if (span) span.textContent = "Copy";
-        }, 2200);
-      })
-      .catch(function(){
-        toast("Could not copy — long-press the account number instead.");
-      });
-  });
-});
-
-/* Show the QR area only when at least one real QR image exists */
-function checkQrArea(){
-  var area = $("qr-area");
-  if (!area) return;
-  var holders = area.querySelectorAll(".qr-holder");
-  var visible = false;
-  holders.forEach(function(h){
-    if (!h.classList.contains("no-qr")) visible = true;
-  });
-  if (!visible) area.classList.add("hidden");
-}
-window.addEventListener("load", checkQrArea);
-
-/* ---------------------------------------------------------------
-   Payment receipt form
-   --------------------------------------------------------------- */
-var receiptForm = $("receipt-form");
-var recError = $("rec-error");
-
-function validateReceipt(){
-  var name = $("rec-name").value.trim();
-  var email = $("rec-email").value.trim();
-  var mobile = $("rec-mobile").value.trim();
-  var method = $("rec-method").value;
-  var ref = $("rec-ref").value.trim();
-
-  if (name.length < 2) return "Please enter your name.";
-  if (!isValidEmail(email)) return "Please enter a valid email address.";
-  if (!isValidPhone(mobile)) return "Please enter a valid mobile number.";
-  if (!method) return "Please select the payment method.";
-  if (!$("rec-amount").value.trim()) return "Please enter the amount.";
-  if (!ref) return "Please enter the reference number.";
-  if (!$("rec-date").value) return "Please enter the date of payment.";
-  return "";
-}
-
-function openReceiptMailto(){
-  var subject = "Payment Receipt — " + $("rec-name").value.trim() + " — " + $("rec-amount").value.trim();
-  var body =
-    "Payment Receipt Details\n\n" +
-    "Name: " + $("rec-name").value.trim() + "\n" +
-    "Email: " + $("rec-email").value.trim() + "\n" +
-    "Mobile: " + $("rec-mobile").value.trim() + "\n" +
-    "Payment Method: " + $("rec-method").value + "\n" +
-    "Amount: " + $("rec-amount").value.trim() + "\n" +
-    "Reference Number: " + $("rec-ref").value.trim() + "\n" +
-    "Date of Payment: " + $("rec-date").value + "\n" +
-    "Submitted: " + new Date().toISOString() + "\n" +
-    "Source: digital business card (QR/NFC)\n\n" +
-    "Note: please attach a screenshot of your payment receipt to this email before sending.";
-  var mailto = "mailto:" + OFFICE.email2 +
-    "?cc=" + encodeURIComponent(OFFICE.email1) +
-    "&subject=" + encodeURIComponent(subject) +
-    "&body=" + encodeURIComponent(body);
-  window.location.href = mailto;
-}
-
-receiptForm.addEventListener("submit", async function(e){
-  e.preventDefault();
-  setError(recError, "");
-
-  if ($("rec-company").value !== ""){ /* honeypot */ closeModal($("modal-receipt")); return; }
-
-  var problem = validateReceipt();
-  if (problem){ setError(recError, problem); return; }
-
-  if (PAYMENT_RECEIPT_ENDPOINT){
-    try {
-      var fd = new FormData();
-      fd.append("name", $("rec-name").value.trim());
-      fd.append("email", $("rec-email").value.trim());
-      fd.append("mobile", $("rec-mobile").value.trim());
-      fd.append("paymentMethod", $("rec-method").value);
-      fd.append("amount", $("rec-amount").value.trim());
-      fd.append("referenceNumber", $("rec-ref").value.trim());
-      fd.append("dateOfPayment", $("rec-date").value);
-      var fileInput = $("rec-file");
-      if (fileInput.files.length) fd.append("receiptFile", fileInput.files[0]);
-      fd.append("timestamp", new Date().toISOString());
-      fd.append("source", "digital business card (QR/NFC)");
-
-      var res = await fetch(PAYMENT_RECEIPT_ENDPOINT, { method: "POST", body: fd });
-      if (!res.ok) throw new Error("HTTP " + res.status);
-      closeModal($("modal-receipt"));
-      receiptForm.reset();
-      toast("Receipt sent. Thank you!");
-    } catch (err){
-      openReceiptMailto();
-      closeModal($("modal-receipt"));
-      toast("Email app opened — please send the receipt email.");
-    }
-  } else {
-    openReceiptMailto();
-    closeModal($("modal-receipt"));
-    toast("Email app opened — please send the receipt email.");
-  }
 });
 
 /* ---------------------------------------------------------------
