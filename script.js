@@ -95,35 +95,46 @@ function isAndroid(){
 }
 
 function saveContact(){
+  /* The vCard is built entirely in the browser from the OFFICE data
+     above — no file is fetched from the server at any point. */
   var vcard = buildVCard();
+  var file = new File([vcard], "Attorney_Tenorio.vcf", { type: "text/vcard" });
 
-  /* iPhone / iPad — data: vCard link opens the iOS contact preview */
+  /* 1) BEST PATH — Web Share API (iOS Safari 15+ and Android Chrome 89+).
+        Opens the phone's OWN share sheet with the .vcf attached.
+        - iPhone: “Contacts” appears in the share sheet → tap it, the
+          pre-filled contact opens → tap “Add”.
+        - Android: “Contacts / Save to contacts” appears in the sheet →
+          pre-filled new-contact screen → tap save.
+        The visitor always taps the final confirmation — a browser can
+        never silently write to the address book. Requires a tap (user
+        gesture) and HTTPS. */
+  if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })){
+    navigator.share({ files: [file], title: OFFICE.fullName })
+      .then(function(){
+        toast("Choose “Contacts” in the share menu to save.");
+      })
+      .catch(function(){ /* user cancelled — do nothing */ });
+    return;
+  }
+
+  /* 2) iPhone / iPad fallback (no file sharing supported): open the
+        vCard in a new tab so iOS shows its contact preview card with
+        the “Add” button. */
   if (isIOS()){
     var uri = "data:text/vcard;charset=utf-8;base64," +
       btoa(unescape(encodeURIComponent(vcard)));
-    var a = document.createElement("a");
-    a.href = uri;
-    a.download = "Attorney_Tenorio.vcf";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+    var w = window.open(uri, "_blank");
+    if (!w){ window.location.href = uri; }
     setTimeout(function(){
       toast("Your phone is opening the contact — tap “Add” to save it.");
     }, 700);
     return;
   }
 
-  /* Android — system share sheet with the .vcf file */
-  if (isAndroid() && navigator.share && navigator.canShare){
-    var file = new File([vcard], "Attorney_Tenorio.vcf", { type: "text/vcard" });
-    if (navigator.canShare({ files: [file] })){
-      navigator.share({ files: [file], title: OFFICE.fullName })
-        .catch(function(){ /* user cancelled */ });
-      return;
-    }
-  }
-
-  /* Desktop & other browsers — download the .vcf */
+  /* 3) Android / desktop fallback — Blob download of the .vcf.
+        (Generated in the browser, so it also works from a page that
+        was cached for offline use.) */
   var blob = new Blob([vcard], { type: "text/vcard" });
   var url = URL.createObjectURL(blob);
   var a = document.createElement("a");
