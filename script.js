@@ -39,7 +39,7 @@ function toast(msg){
   t.textContent = msg;
   t.classList.add("show");
   clearTimeout(t._timer);
-  t._timer = setTimeout(function(){ t.classList.remove("show"); }, 2800);
+  t._timer = setTimeout(function(){ t.classList.remove("show"); }, 3000);
 }
 
 function localIso(d){
@@ -49,21 +49,33 @@ function localIso(d){
   return y + "-" + m + "-" + day;
 }
 
-/* ---------------------------------------------------------------
-   SAVE CONTACT
-   A browser is not allowed to silently write to the phone's address
-   book, so "Save Contact" opens the phone's own contact-save screen
-   with every field pre-filled — the visitor taps the final Add.
+function copyText(text){
+  if (navigator.clipboard && window.isSecureContext){
+    return navigator.clipboard.writeText(text);
+  }
+  return new Promise(function(resolve, reject){
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand("copy");
+      resolve();
+    } catch(e){
+      reject(e);
+    }
+    ta.remove();
+  });
+}
 
-   - iPhone / iPad: the vCard opens as a data link; iOS displays the
-     contact preview card where the visitor taps "Add" (or Share →
-     Save to Contacts). This is the closest thing to a direct save
-     that Safari allows.
-   - Android (Chrome): the .vcf file is shared through the system
-     share sheet, where "Contacts / Save to contacts" appears and
-     opens the new-contact screen pre-filled.
-   - Desktop: the .vcf downloads and is imported via Outlook /
-     Google Contacts / iCloud as usual.
+/* ---------------------------------------------------------------
+   VCARD BUILDER
+   Built entirely in the browser from OFFICE above — no file is
+   fetched from the server, ever. Uses CRLF line endings and escaped
+   commas, as the vCard spec requires.
    --------------------------------------------------------------- */
 function buildVCard(){
   var lines = [
@@ -90,65 +102,66 @@ function isIOS(){
     (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 }
 
-function isAndroid(){
-  return /Android/.test(navigator.userAgent);
-}
+/* ---------------------------------------------------------------
+   SAVE CONTACT
+   No Blob, no <a download> — those are what iOS ignores. Instead:
 
+   1) Web Share API (Android Chrome 89+ and iOS Safari 15+):
+      the phone's own share sheet opens with the .vcf attached.
+      iPhone: tap "Contacts" in the sheet → pre-filled contact → Add.
+      Android: tap "Contacts / Save to contacts" → new-contact screen
+      pre-filled → save.
+   2) iOS without share support: the vCard opens as a data: URI, so
+      the browser shows the contact preview card with an "Add" button.
+   3) Desktop/other: a data: URI link with a filename — this works in
+      every desktop browser.
+   If all else fails, "Copy contact details" (the small link under
+   the buttons) opens a panel with the full vCard text, a copy button
+   and one-tap call/email links.
+   --------------------------------------------------------------- */
 function saveContact(){
-  /* The vCard is built entirely in the browser from the OFFICE data
-     above — no file is fetched from the server at any point. */
-  var vcard = buildVCard();
-  var file = new File([vcard], "Attorney_Tenorio.vcf", { type: "text/vcard" });
+  try {
+    var vcard = buildVCard();
 
-  /* 1) BEST PATH — Web Share API (iOS Safari 15+ and Android Chrome 89+).
-        Opens the phone's OWN share sheet with the .vcf attached.
-        - iPhone: “Contacts” appears in the share sheet → tap it, the
-          pre-filled contact opens → tap “Add”.
-        - Android: “Contacts / Save to contacts” appears in the sheet →
-          pre-filled new-contact screen → tap save.
-        The visitor always taps the final confirmation — a browser can
-        never silently write to the address book. Requires a tap (user
-        gesture) and HTTPS. */
-  if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })){
-    navigator.share({ files: [file], title: OFFICE.fullName })
-      .then(function(){
-        toast("Choose “Contacts” in the share menu to save.");
-      })
-      .catch(function(){ /* user cancelled — do nothing */ });
-    return;
+    /* 1) Share sheet with the file (Android + iOS 15+) */
+    var file = new File([vcard], "Attorney_Tenorio.vcf", { type: "text/vcard" });
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })){
+      navigator.share({ files: [file], title: OFFICE.fullName })
+        .then(function(){
+          toast("Choose “Contacts” in the share menu to save.");
+        })
+        .catch(function(){ /* user cancelled */ });
+      return;
+    }
+
+    /* 2) iOS fallback — open the vCard directly (contact preview
+          appears with an “Add” button) */
+    if (isIOS()){
+      var uri = "data:text/vcard;charset=utf-8," + encodeURIComponent(vcard);
+      window.location.href = uri;
+      setTimeout(function(){
+        toast("If nothing opened, use “Copy the contact details” below.");
+      }, 1500);
+      return;
+    }
+
+    /* 3) Desktop / other browsers */
+    var uri2 = "data:text/vcard;charset=utf-8," + encodeURIComponent(vcard);
+    var a = document.createElement("a");
+    a.href = uri2;
+    a.download = "Attorney_Tenorio.vcf";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    toast("Contact opening — add it to your contacts.");
+  } catch(err){
+    if (window.console) console.error(err);
+    toast("Could not open the contact — use “Copy the contact details” below.");
   }
-
-  /* 2) iPhone / iPad fallback (no file sharing supported): open the
-        vCard in a new tab so iOS shows its contact preview card with
-        the “Add” button. */
-  if (isIOS()){
-    var uri = "data:text/vcard;charset=utf-8;base64," +
-      btoa(unescape(encodeURIComponent(vcard)));
-    var w = window.open(uri, "_blank");
-    if (!w){ window.location.href = uri; }
-    setTimeout(function(){
-      toast("Your phone is opening the contact — tap “Add” to save it.");
-    }, 700);
-    return;
-  }
-
-  /* 3) Android / desktop fallback — Blob download of the .vcf.
-        (Generated in the browser, so it also works from a page that
-        was cached for offline use.) */
-  var blob = new Blob([vcard], { type: "text/vcard" });
-  var url = URL.createObjectURL(blob);
-  var a = document.createElement("a");
-  a.href = url;
-  a.download = "Attorney_Tenorio.vcf";
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  setTimeout(function(){ URL.revokeObjectURL(url); }, 60000);
-  toast("Contact file downloaded — open it to add to your contacts.");
 }
 
 /* ---------------------------------------------------------------
-   Modals
+   MODALS
    --------------------------------------------------------------- */
 var lastFocus = null;
 
@@ -170,29 +183,8 @@ function closeModal(m){
   if (lastFocus) lastFocus.focus();
 }
 
-document.querySelectorAll("[data-open]").forEach(function(btn){
-  btn.addEventListener("click", function(){ openModal(btn.getAttribute("data-open")); });
-});
-
-document.querySelectorAll("[data-close]").forEach(function(btn){
-  btn.addEventListener("click", function(){ closeModal(btn.closest(".modal")); });
-});
-
-document.querySelectorAll(".modal").forEach(function(m){
-  m.addEventListener("click", function(e){
-    if (e.target === m) closeModal(m);
-  });
-});
-
-window.addEventListener("keydown", function(e){
-  if (e.key === "Escape"){
-    var open = document.querySelector(".modal.open");
-    if (open) closeModal(open);
-  }
-});
-
 /* ---------------------------------------------------------------
-   Chips (single-select radiogroups)
+   CHIPS (single-select radiogroups)
    --------------------------------------------------------------- */
 function buildChips(containerId, options){
   var grid = $(containerId);
@@ -231,7 +223,7 @@ var getTimeSlot = buildChips(
 );
 
 /* ---------------------------------------------------------------
-   Appointment form
+   APPOINTMENT FORM
    --------------------------------------------------------------- */
 var today = new Date();
 var apptDateInput = $("appt-date");
@@ -239,7 +231,7 @@ apptDateInput.min = localIso(today);
 
 var apptForm = $("appointment-form");
 var apptError = $("appt-error");
-var lastAppointment = null;   /* used by the "Add to Calendar" button */
+var lastAppointment = null;   /* used by the calendar actions below */
 
 function setError(el, msg){
   if (msg){ el.textContent = msg; el.classList.remove("hidden"); }
@@ -320,7 +312,7 @@ function showAppointmentSuccess(mode){
   if (sheet) sheet.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-apptForm.addEventListener("submit", async function(e){
+apptForm.addEventListener("submit", function(e){
   e.preventDefault();
   setError(apptError, "");
 
@@ -333,31 +325,40 @@ apptForm.addEventListener("submit", async function(e){
   var payload = buildAppointmentPayload();
   lastAppointment = payload;
 
-  if (APPOINTMENT_ENDPOINT){
-    try {
-      var res = await fetch(APPOINTMENT_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-      if (!res.ok) throw new Error("HTTP " + res.status);
-      apptForm.reset();
-      showAppointmentSuccess("backend");
-      toast("Appointment request sent.");
-    } catch (err){
-      apptForm.reset();
-      openAppointmentMailto(payload);
-      showAppointmentSuccess("email-fallback");
-    }
-  } else {
+  doSend(payload);
+});
+
+function doSend(payload){
+  function viaMail(){
     apptForm.reset();
     openAppointmentMailto(payload);
     showAppointmentSuccess("email-fallback");
   }
-});
+  function viaBackend(){
+    apptForm.reset();
+    showAppointmentSuccess("backend");
+    toast("Appointment request sent.");
+  }
+
+  if (!APPOINTMENT_ENDPOINT){ viaMail(); return; }
+
+  fetch(APPOINTMENT_ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  }).then(function(res){
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    viaBackend();
+  }).catch(function(){
+    viaMail();
+  });
+}
 
 /* ---------------------------------------------------------------
-   Add to Calendar (.ics)
+   CALENDAR — after a request is submitted.
+   Primary: Google Calendar template link (works in every mobile
+   browser — no app needed). Secondary: .ics file download and a
+   copy-the-details fallback. No Blob URLs anywhere.
    --------------------------------------------------------------- */
 function escapeIcs(s){
   return String(s || "").replace(/\\/g, "\\\\")
@@ -373,28 +374,47 @@ function parseTime(t){
   return { h: h, m: m };
 }
 
-function icsStamp(d){
-  return d.getUTCFullYear() +
-    String(d.getUTCMonth() + 1).padStart(2, "0") +
-    String(d.getUTCDate()).padStart(2, "0") + "T" +
-    String(d.getUTCHours()).padStart(2, "0") +
-    String(d.getUTCMinutes()).padStart(2, "0") + "00Z";
-}
-
-function buildIcs(p){
+function eventStartEnd(p){
   var parts = p.appointmentDate.split("-");
   var tm = parseTime(p.appointmentTime);
   var start = new Date(+parts[0], +parts[1] - 1, +parts[2], tm.h, tm.m, 0);
   var end = new Date(start.getTime() + 60 * 60 * 1000);
+  return { start: start, end: end };
+}
 
-  function localStamp(d){
-    return d.getFullYear() +
-      String(d.getMonth() + 1).padStart(2, "0") +
-      String(d.getDate()).padStart(2, "0") + "T" +
-      String(d.getHours()).padStart(2, "0") +
-      String(d.getMinutes()).padStart(2, "0") + "00";
+function pad2(n){ return String(n).padStart(2, "0"); }
+
+function googleCalendarUrl(p){
+  var se = eventStartEnd(p);
+  function fmt(d){
+    return d.getFullYear() + pad2(d.getMonth() + 1) + pad2(d.getDate()) +
+      "T" + pad2(d.getHours()) + pad2(d.getMinutes()) + "00";
   }
+  var summary = p.consultationType + " — " + OFFICE.fullName;
+  var details =
+    p.consultationType + " with " + OFFICE.fullName + " (" + OFFICE.org + ").\n" +
+    "Client: " + p.clientName + "\nMobile: " + p.mobileNumber + "\nEmail: " + p.email +
+    (p.message ? "\nReason: " + p.message : "") +
+    "\n\nThis appointment is a request and is only confirmed after the law office confirms it.";
+  return "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+    "&text=" + encodeURIComponent(summary) +
+    "&dates=" + fmt(se.start) + "/" + fmt(se.end) +
+    "&details=" + encodeURIComponent(details) +
+    "&location=" + encodeURIComponent(OFFICE.address);
+}
 
+function icsStamp(d){
+  return d.getUTCFullYear() +
+    pad2(d.getUTCMonth() + 1) + pad2(d.getUTCDate()) + "T" +
+    pad2(d.getUTCHours()) + pad2(d.getUTCMinutes()) + "00Z";
+}
+
+function buildIcs(p){
+  var se = eventStartEnd(p);
+  function localStamp(d){
+    return d.getFullYear() + pad2(d.getMonth() + 1) + pad2(d.getDate()) +
+      "T" + pad2(d.getHours()) + pad2(d.getMinutes()) + "00";
+  }
   var uid = "ctlo-" + Date.now() + "-" + Math.random().toString(36).slice(2) + "@cristaltenorio.ph";
   var summary = p.consultationType + " — " + OFFICE.fullName;
   var description =
@@ -402,7 +422,6 @@ function buildIcs(p){
     "Client: " + p.clientName + "\nMobile: " + p.mobileNumber + "\nEmail: " + p.email +
     (p.message ? "\nReason: " + p.message : "") +
     "\n\nThis appointment is a request and is only confirmed after the law office confirms it.";
-
   var lines = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
@@ -410,8 +429,8 @@ function buildIcs(p){
     "BEGIN:VEVENT",
     "UID:" + uid,
     "DTSTAMP:" + icsStamp(new Date()),
-    "DTSTART:" + localStamp(start),
-    "DTEND:" + localStamp(end),
+    "DTSTART:" + localStamp(se.start),
+    "DTEND:" + localStamp(se.end),
     "SUMMARY:" + escapeIcs(summary),
     "DESCRIPTION:" + escapeIcs(description),
     "LOCATION:" + escapeIcs(OFFICE.address),
@@ -421,33 +440,102 @@ function buildIcs(p){
   return lines.join("\r\n") + "\r\n";
 }
 
-$("add-calendar").addEventListener("click", function(){
-  if (!lastAppointment){ toast("No appointment to add yet."); return; }
-  var ics = buildIcs(lastAppointment);
-  var blob = new Blob([ics], { type: "text/calendar" });
-  var url = URL.createObjectURL(blob);
+function addToCalendar(){
+  try {
+    if (!lastAppointment){ toast("No appointment to add yet."); return; }
+    var url = googleCalendarUrl(lastAppointment);
+    var w = window.open(url, "_blank");
+    if (!w){ window.location.href = url; }
+  } catch(err){
+    if (window.console) console.error(err);
+    toast("Could not open the calendar — use “Copy event details” instead.");
+  }
+}
 
-  var file = new File([blob], "appointment.ics", { type: "text/calendar" });
-  if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })){
-    navigator.share({ files: [file], title: "Add consultation to calendar" })
-      .catch(function(){})
-      .finally(function(){ setTimeout(function(){ URL.revokeObjectURL(url); }, 60000); });
+function downloadIcs(){
+  try {
+    if (!lastAppointment){ toast("No appointment to add yet."); return; }
+    var ics = buildIcs(lastAppointment);
+    var uri = "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
+    var a = document.createElement("a");
+    a.href = uri;
+    a.download = "appointment.ics";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  } catch(err){
+    if (window.console) console.error(err);
+    toast("Could not create the file — use “Copy event details” instead.");
+  }
+}
+
+function copyIcsDetails(){
+  try {
+    if (!lastAppointment){ toast("No appointment to add yet."); return; }
+    copyText(buildIcs(lastAppointment))
+      .then(function(){ toast("Event details copied — paste them into your calendar app."); })
+      .catch(function(){ toast("Could not copy — long-press the request email instead."); });
+  } catch(err){
+    if (window.console) console.error(err);
+    toast("Could not copy — long-press the request email instead.");
+  }
+}
+
+/* ---------------------------------------------------------------
+   SAVE CONTACT HELP (visible fallback)
+   --------------------------------------------------------------- */
+function openContactHelp(){
+  try {
+    $("sv-vcard-text").value = buildVCard();
+    openModal("modal-save-help");
+  } catch(err){
+    if (window.console) console.error(err);
+    toast("Could not prepare the details — please call or email us.");
+  }
+}
+
+function copyContactDetails(){
+  try {
+    copyText($("sv-vcard-text").value)
+      .then(function(){ toast("Contact details copied — paste into your Contacts app."); })
+      .catch(function(){ toast("Could not copy — long-press the text box instead."); });
+  } catch(err){
+    if (window.console) console.error(err);
+    toast("Could not copy — long-press the text box instead.");
+  }
+}
+
+/* ---------------------------------------------------------------
+   ONE delegated click handler for everything.
+   Because it lives on document, handlers can never be orphaned by
+   DOM changes (e.g. after the appointment form is hidden/swapped).
+   --------------------------------------------------------------- */
+document.addEventListener("click", function(e){
+  var t = e.target;
+
+  /* Backdrop click closes the modal */
+  if (t.classList && t.classList.contains("modal")){
+    closeModal(t);
     return;
   }
 
-  var a = document.createElement("a");
-  a.href = url;
-  a.download = "appointment.ics";
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  toast("Calendar file downloaded — open it to add.");
-  setTimeout(function(){ URL.revokeObjectURL(url); }, 60000);
+  var openBtn = t.closest ? t.closest("[data-open]") : null;
+  if (openBtn){ openModal(openBtn.getAttribute("data-open")); return; }
+
+  var closeBtn = t.closest ? t.closest("[data-close]") : null;
+  if (closeBtn){ closeModal(closeBtn.closest(".modal")); return; }
+
+  if (t.closest && t.closest(".js-save")){ saveContact(); return; }
+  if (t.closest && t.closest("#copy-contact-details")){ openContactHelp(); return; }
+  if (t.closest && t.closest("#sv-copy")){ copyContactDetails(); return; }
+  if (t.closest && t.closest("#add-calendar")){ addToCalendar(); return; }
+  if (t.closest && t.closest("#dl-ics")){ downloadIcs(); return; }
+  if (t.closest && t.closest("#copy-ics-details")){ copyIcsDetails(); return; }
 });
 
-/* ---------------------------------------------------------------
-   Save contact buttons (every element with class js-save)
-   --------------------------------------------------------------- */
-document.querySelectorAll(".js-save").forEach(function(btn){
-  btn.addEventListener("click", saveContact);
+window.addEventListener("keydown", function(e){
+  if (e.key === "Escape"){
+    var open = document.querySelector(".modal.open");
+    if (open) closeModal(open);
+  }
 });
