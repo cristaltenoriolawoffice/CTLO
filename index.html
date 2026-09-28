@@ -44,10 +44,12 @@
     <!-- Primary action tabs -->
     <div class="cta-row">
       <button type="button" class="btn btn-outline" data-open="modal-appointment">Book an Appointment</button>
-      <!-- Save Contact: a plain link to a real .vcf file. No JavaScript,
-           no Blob, no download trick — this is the form every phone
-           (including browsers opened from an NFC tap) handles. -->
-      <a class="btn btn-outline btn-save-row" href="contact.vcf" type="text/vcard" download="Attorney_Tenorio.vcf">
+      <!-- Save Contact: the vCard travels INSIDE this link as a data URI,
+           so the button works even when no .vcf file sits next to the page.
+           iPhone: opens the contact card -> tap Add.
+           Android: opens the contact importer.
+           No JavaScript, no Blob, nothing a browser can block. -->
+      <a class="btn btn-outline btn-save-row" href="data:text/vcard;charset=utf-8;base64,QkVHSU46VkNBUkQNClZFUlNJT046My4wDQpOOlRlbm9yaW87RG9ubmFiZWw7OzsNCkZOOkFUVFkuIERPTk5BQkVMIEMuIFRFTk9SSU8NCk9SRzpDcmlzdGFsIFRlbm9yaW8gTGF3IE9mZmljZQ0KVElUTEU6TGF3eWVyDQpURUw7VFlQRT1XT1JLO1RZUEU9Vk9JQ0U6KzYzMjcyNTcxODAyDQpURUw7VFlQRT1DRUxMOis2Mzk5MTc5MjQzMDINClRFTDtUWVBFPUNFTEw6KzYzOTMzODEyNDIxMA0KVEVMO1RZUEU9Q0VMTDorNjM5MzM4NTQ5NTI5DQpFTUFJTDtUWVBFPUlOVEVSTkVUO1RZUEU9V09SSzpjcmlzdGFsdGVub3Jpb2xhd29mZmljZUB5YWhvby5jb20NCkVNQUlMO1RZUEU9SU5URVJORVQ7VFlQRT1XT1JLOmNyaXN0YWx0ZW5vcmlvbGF3b2ZmaWNlQGdtYWlsLmNvbQ0KQURSO1RZUEU9V09SSzo7O1VuaXQgNCBNZXp6YW5pbmUgQXJlYVwsIEVzdHJlcmEgQnVpbGRpbmdcLCA3ODkgSi5QLiBSaXphbCBTdC5cLCBCcmd5LiBQb2JsYWNpb247TWFrYXRpIENpdHk7TWV0cm8gTWFuaWxhOzEyMDg7UGhpbGlwcGluZXMNCkVORDpWQ0FSRA0K" download="Attorney_Tenorio.vcf" type="text/vcard">
         <i class="fa-solid fa-user-plus" aria-hidden="true"></i> Save Contact
       </a>
     </div>
@@ -237,7 +239,7 @@ Makati City, Metro Manila 1208, Philippines</div>
    keeps working. Requires HTTPS. */
 if ("serviceWorker" in navigator){
   window.addEventListener("load", function(){
-    navigator.serviceWorker.register("sw.js").catch(function(){});
+    navigator.serviceWorker.register("sw.js", { updateViaCache: "none" }).catch(function(){});
   });
 }
 </script>
