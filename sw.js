@@ -1,20 +1,21 @@
 /* ============================================================
    sw.js — offline support for the digital business card
-   After the first visit, the site files are cached so the page
-   loads without an internet connection. “Save Contact” still
-   works offline because the vCard is built in the browser.
-   Requires HTTPS (all normal hosting plans already have this).
+   After the first visit the site files (and contact.vcf) are
+   cached, so the page still opens with no internet and
+   “Save Contact” keeps working — the .vcf is served from cache.
+   Requires HTTPS.
    ------------------------------------------------------------
-   To refresh the cached files later, change CACHE below to a new
-   name (e.g. "ctlo-cache-v2") and re-upload sw.js.
+   To refresh the cached files later, change CACHE to a new name
+   (e.g. "ctlo-cache-v2") and re-upload this file.
    ============================================================ */
 
-var CACHE = "ctlo-cache-v1";
+var CACHE = "ctlo-cache-v2";
 var ASSETS = [
   "./",
   "./index.html",
   "./style.css",
-  "./script.js"
+  "./script.js",
+  "./contact.vcf"
 ];
 
 self.addEventListener("install", function(e){
@@ -56,4 +57,3 @@ self.addEventListener("fetch", function(e){
     })
   );
 });
-
